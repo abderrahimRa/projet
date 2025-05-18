@@ -1,0 +1,75 @@
+
+main {
+    background-image: url('./finance.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.logout {
+    position: absolute; 
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #F0EFED;
+    box-shadow: 30px 0 #F0EFED;
+    padding: 5px 10px;
+    margin: 10px 20px 0 0;
+}
+
+.logout button {
+    width: 75px;
+    height: 30px;
+    color: white;
+    border-radius: 8px;
+    background-color: #3F3F3D;
+    border: none;
+    margin-left: 10px;
+}
+
+.logout button:hover {
+    cursor: pointer;
+}
+
+.logout a {
+    text-decoration: none;
+}
+
+.logout h2 {
+    text-align: left;
+}
+.logout-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .logout-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+  }

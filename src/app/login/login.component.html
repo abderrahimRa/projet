@@ -1,0 +1,54 @@
+<div class="login-container">
+  <h2>Login</h2>
+  
+  <div *ngIf="loginError" class="error-message">
+    {{ loginError }}
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div class="input-group">
+        <input type="text" 
+             [(ngModel)]="username" 
+             name="username"
+             required
+             #usernameInput="ngModel"
+             [class.invalid]="usernameInput.invalid && usernameInput.touched"
+             placeholder=" ">
+          <label>Username</label>
+         <span *ngIf="usernameInput.invalid && usernameInput.touched" class="error-hint">x</span>
+       <span class="icon">👤</span>
+    </div>
+    
+    <div class="input-group">
+      <input type="password"
+             [(ngModel)]="password"
+             name="password"
+             required
+             #passwordInput="ngModel"
+             [class.invalid]="passwordInput.invalid && passwordInput.touched"
+             placeholder=" ">
+         <label>Password</label>
+        <span *ngIf="passwordInput.invalid && passwordInput.touched" class="error-hint">x</span>
+      <span class="icon">🔒</span>
+    </div>
+
+    <div class="input-group">
+      <select [(ngModel)]="selectedYear" 
+              name="year"
+              required
+              #yearInput="ngModel"
+              [class.invalid]="yearInput.invalid && yearInput.touched">
+        <option *ngFor="let year of years" [value]="year">{{year}}</option>
+      </select>
+      <label>Year</label>
+      <span *ngIf="yearInput.invalid && yearInput.touched" class="error-hint">x</span>
+      <span class="icon">📅</span>
+    </div>
+
+    <button type="submit" 
+            class="login-button">
+        <span *ngIf="!isSubmitting">LOGIN</span>
+      <span *ngIf="isSubmitting" class="loading-spinner"></span>
+    </button>
+  </form>
+</div>

@@ -1,0 +1,178 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Education sector: Primary education</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="6">Public</th>
+      <th colspan="6">Private</th>
+    </tr>
+    <tr>
+      <th>Number of schools</th>
+      <th>Number of classes</th>
+      <th>Number of classes used</th>
+      <th>Number of students enrolled</th>
+      <th>Class occupancy rate (students/class)</th>
+      <th>Number of canteens or boarding schools</th>
+      <th>Number of schools</th>
+      <th>Number of classes</th>
+      <th>Number of classes used</th>
+      <th>Number of students enrolled</th>
+      <th>Class occupancy rate (students/class)</th>
+      <th>Number of canteens or boarding schools</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'pubNumSchools', $event)">{{row.pubNumSchools}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'pubNumClasses', $event)">{{row.pubNumClasses}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'pubNumClassesUsed', $event)">{{row.pubNumClassesUsed}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'pubNumStudentsEnrolled', $event)">{{row.pubNumStudentsEnrolled}}</td>
+      <td>{{row.pubClassOccupancyRate | number:'1.2-2'}}%</td>
+      <td contenteditable="true" (input)="updateCell(i, 'pubNumCanteens', $event)">{{row.pubNumCanteens}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'priNumSchools', $event)">{{row.priNumSchools}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'priNumClasses', $event)">{{row.priNumClasses}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'priNumClassesUsed', $event)">{{row.priNumClassesUsed}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'priNumStudentsEnrolled', $event)">{{row.priNumStudentsEnrolled}}</td>
+      <td>{{row.priClassOccupancyRate | number:'1.2-2'}}%</td>
+      <td contenteditable="true" (input)="updateCell(i, 'priNumCanteens', $event)">{{row.priNumCanteens}}</td>
+    </tr>
+  </table>
+  <div class="button-container">
+    <button (click)="toggleTable()" class="tabButton">
+      summary status of the State
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel"   (click)="saveAllData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+  <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="6">Public</th>
+      <th colspan="6">Private</th>
+    </tr>
+    <tr>
+      <th>Number of schools</th>
+      <th>Number of classes</th>
+      <th>Number of classes used</th>
+      <th>Number of students enrolled</th>
+      <th>Class occupancy rate (students/class)</th>
+      <th>Number of canteens or boarding schools</th>
+      <th>Number of schools</th>
+      <th>Number of classes</th>
+      <th>Number of classes used</th>
+      <th>Number of students enrolled</th>
+      <th>Class occupancy rate (students/class)</th>
+      <th>Number of canteens or boarding schools</th>
+    </tr>
+    <tr>
+      <td colspan="14" class="daira">Daira: Bouira</td>
+    </tr>
+    <tr *ngFor="let row of FirstData; let i = index">
+      <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'pubNumSchools', $event)">{{row.pubNumSchools}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'pubNumClasses', $event)">{{row.pubNumClasses}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'pubNumClassesUsed', $event)">{{row.pubNumClassesUsed}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'pubNumStudentsEnrolled', $event)">{{row.pubNumStudentsEnrolled}}</td>
+      <td>{{row.pubClassOccupancyRate | number:'1.2-2'}}%</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'pubNumCanteens', $event)">{{row.pubNumCanteens}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'priNumSchools', $event)">{{row.priNumSchools}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'priNumClasses', $event)">{{row.priNumClasses}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'priNumClassesUsed', $event)">{{row.priNumClassesUsed}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'priNumStudentsEnrolled', $event)">{{row.priNumStudentsEnrolled}}</td>
+      <td>{{row.priClassOccupancyRate | number:'1.2-2'}}%</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'priNumCanteens', $event)">{{row.priNumCanteens}}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{FirstPubNumSchools}}</td>
+      <td>{{FirstPubNumClasses}}</td>
+      <td>{{FirstPubNumClassesUsed}}</td>
+      <td>{{FirstPubNumStudentsEnrolled}}</td>
+      <td>{{FirstPubClassOccupancyRate | number:'1.2-2'}}%</td>
+      <td>{{FirstPubNumCanteens}}</td>
+      <td>{{FirstPriNumSchools}}</td>
+      <td>{{FirstPriNumClasses}}</td>
+      <td>{{FirstPriNumClassesUsed}}</td>
+      <td>{{FirstPriNumStudentsEnrolled}}</td>
+      <td>{{FirstPriClassOccupancyRate | number:'1.2-2'}}%</td>
+      <td>{{FirstPriNumCanteens}}</td>
+    </tr>
+    
+    <tr>
+      <td colspan="14" class="daira">Daira: Sour El Ghozlane</td>
+    </tr>
+    <tr *ngFor="let row of SecondData; let i = index">
+      <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'pubNumSchools', $event)">{{row.pubNumSchools}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'pubNumClasses', $event)">{{row.pubNumClasses}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'pubNumClassesUsed', $event)">{{row.pubNumClassesUsed}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'pubNumStudentsEnrolled', $event)">{{row.pubNumStudentsEnrolled}}</td>
+      <td>{{row.pubClassOccupancyRate | number:'1.2-2'}}%</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'pubNumCanteens', $event)">{{row.pubNumCanteens}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'priNumSchools', $event)">{{row.priNumSchools}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'priNumClasses', $event)">{{row.priNumClasses}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'priNumClassesUsed', $event)">{{row.priNumClassesUsed}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'priNumStudentsEnrolled', $event)">{{row.priNumStudentsEnrolled}}</td>
+      <td>{{row.priClassOccupancyRate | number:'1.2-2'}}%</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'priNumCanteens', $event)">{{row.priNumCanteens}}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{SecondPubNumSchools}}</td>
+      <td>{{SecondPubNumClasses}}</td>
+      <td>{{SecondPubNumClassesUsed}}</td>
+      <td>{{SecondPubNumStudentsEnrolled}}</td>
+      <td>{{SecondPubClassOccupancyRate | number:'1.2-2'}}%</td>
+      <td>{{SecondPubNumCanteens}}</td>
+      <td>{{SecondPriNumSchools}}</td>
+      <td>{{SecondPriNumClasses}}</td>
+      <td>{{SecondPriNumClassesUsed}}</td>
+      <td>{{SecondPriNumStudentsEnrolled}}</td>
+      <td>{{SecondPriClassOccupancyRate | number:'1.2-2'}}%</td>
+      <td>{{SecondPriNumCanteens}}</td>
+    </tr>
+  </table>
+  <div class="charts-container">
+    <div class="chart-container">
+      <h3>Primary Education Overview</h3>
+      <canvas id="stateChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h3>Daira Comparison</h3>
+      <canvas id="dairaComparisonChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="occupancyTrendChart"></canvas>
+    </div>
+  </div>
+ </main>

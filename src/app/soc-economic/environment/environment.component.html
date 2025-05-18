@@ -1,0 +1,126 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Environment</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleDetailTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+      <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+        <tr>
+          <th rowspan="2">Code</th>
+          <th rowspan="2">State</th>
+          <th colspan="5">Environment</th>
+        </tr>
+        <tr>
+          <th>Quantity of waste generated per year in tons</th>
+          <th>Number of landfills (CET)</th>
+          <th>Number of controlled landfills</th>
+          <th>Number of uncontrolled landfills</th>
+          <th>Waste recycling in tons</th>
+        </tr>
+        <tr *ngFor="let row of tableData; let i = index">
+          <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{ row.code }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{ row.state }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'generatedWaste', $event)">{{ row.generatedWaste }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'numLandfills', $event)">{{ row.numLandfills }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'numControlledLandfills', $event)">{{ row.numControlledLandfills }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'numUncontrolledLandfills', $event)">{{ row.numUncontrolledLandfills }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'wasteRecycle', $event)">{{ row.wasteRecycle }}</td>
+        </tr>
+      </table>
+    
+      <div class="button-container">
+        <button (click)="toggleDetailTable()" class="tabButton">
+          Detail per town
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="saveAllData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel2()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+      <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+        <tr>
+          <th rowspan="2">Code</th>
+          <th rowspan="2">State</th>
+          <th colspan="5">Environment</th>
+        </tr>
+        <tr>
+          <th>Quantity of waste generated per year in tons</th>
+          <th>Number of landfills (CET)</th>
+          <th>Number of controlled landfills</th>
+          <th>Number of uncontrolled landfills</th>
+          <th>Waste recycling in tons</th>
+        </tr>
+        <tr>
+          <td colspan="7" class="daira">Daira: Bouira</td>
+        </tr>
+        <tr *ngFor="let row of FirstData; let i = index">
+          <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{ row.code }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{ row.state }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'generatedWaste', $event)">{{ row.generatedWaste }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'numLandfills', $event)">{{ row.numLandfills }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'numControlledLandfills', $event)">{{ row.numControlledLandfills }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'numUncontrolledLandfills', $event)">{{ row.numUncontrolledLandfills }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'wasteRecycle', $event)">{{ row.wasteRecycle }}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="total">Total Daira:</td>
+          <td>{{ FirstgeneratedWaste }}</td>
+          <td>{{ FirstnumLandfills }}</td>
+          <td>{{ FirstnumControlledLandfills }}</td>
+          <td>{{ FirstnumUncontrolledLandfills }}</td>
+          <td>{{ FirstwasteRecycle }}</td>
+        </tr>
+        <tr>
+          <td colspan="7" class="daira">Daira: Sour el ghozlane</td>
+        </tr>
+        <tr *ngFor="let row of SecondData; let i = index">
+          <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{ row.code }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{ row.state }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'generatedWaste', $event)">{{ row.generatedWaste }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'numLandfills', $event)">{{ row.numLandfills }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'numControlledLandfills', $event)">{{ row.numControlledLandfills }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'numUncontrolledLandfills', $event)">{{ row.numUncontrolledLandfills }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'wasteRecycle', $event)">{{ row.wasteRecycle }}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="total">Total Daira:</td>
+          <td>{{ SecondgeneratedWaste }}</td>
+          <td>{{ SecondnumLandfills }}</td>
+          <td>{{ SecondnumControlledLandfills }}</td>
+          <td>{{ SecondnumUncontrolledLandfills }}</td>
+          <td>{{ SecondwasteRecycle }}</td>
+        </tr>
+      </table>
+
+<div class="charts-container">
+  <div class="chart-wrapper">
+    <canvas id="stateChart"></canvas>
+  </div>
+  <div class="chart-wrapper">
+    <canvas id="wasteChart"></canvas>
+  </div>
+  <div class="chart-wrapper">
+    <canvas id="landfillChart"></canvas>
+  </div>
+</div>
+ </main>

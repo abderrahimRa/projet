@@ -1,0 +1,131 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Worship</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="7">Worship</th>
+    </tr>
+    <tr>
+      <th>Grand Mosque/Pole Mosque</th>
+      <th>Number of mosques</th>
+      <th>Number of Islamic cultural centers</th>
+      <th>Number of Quranic schools</th>
+      <th>Number of religious leadership training schools and institutes</th>
+      <th>Number of zaouias</th>
+      <th>Other non-Islamic religious institutions</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'grandMosqueCount', $event)">{{row.grandMosqueCount}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'mosqueCount', $event)">{{row.mosqueCount}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'islamicCenterCount', $event)">{{row.islamicCenterCount}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'quranicSchoolCount', $event)">{{row.quranicSchoolCount}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'religiousSchoolCount', $event)">{{row.religiousSchoolCount}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'zaouiaCount', $event)">{{row.zaouiaCount}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'otherReligiousInstitutionCount', $event)">{{row.otherReligiousInstitutionCount}}</td>
+    </tr>
+  </table>
+
+  <div class="button-container">
+    <button (click)="toggleDetailTable()" class="tabButton">
+      summary status of the State
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel"   (click)="saveAllData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+
+  <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="7">Worship</th>
+    </tr>
+    <tr>
+      <th>Grand Mosque/Pole Mosque</th>
+      <th>Number of mosques</th>
+      <th>Number of Islamic cultural centers</th>
+      <th>Number of Quranic schools</th>
+      <th>Number of religious leadership training schools and institutes</th>
+      <th>Number of zaouias</th>
+      <th>Other non-Islamic religious institutions</th>
+    </tr>
+    
+    <tr >
+      <td colspan="9" class="daira">Daira: Bouira</td>
+    </tr>
+    <tr *ngFor="let row of FirstData; let i = index">
+      <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'grandMosqueCount', $event)">{{row.grandMosqueCount}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'mosqueCount', $event)">{{row.mosqueCount}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'islamicCenterCount', $event)">{{row.islamicCenterCount}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'quranicSchoolCount', $event)">{{row.quranicSchoolCount}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'religiousSchoolCount', $event)">{{row.religiousSchoolCount}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'zaouiaCount', $event)">{{row.zaouiaCount}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'otherReligiousInstitutionCount', $event)">{{row.otherReligiousInstitutionCount}}</td>
+    </tr>
+    <tr >
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{FirstgrandMosqueCount}}</td>
+      <td>{{FirstmosqueCount}}</td>
+      <td>{{FirstislamicCenterCount}}</td>
+      <td>{{FirstquranicSchoolCount}}</td>
+      <td>{{FirstreligiousSchoolCount}}</td>
+      <td>{{FirstzaouiaCount}}</td>
+      <td>{{FirstotherReligiousInstitutionCount}}</td>
+    </tr>
+    
+    <tr >
+      <td colspan="9" class="daira">Daira: Sour el ghozlane</td>
+    </tr>
+    <tr *ngFor="let row of SecondData; let i = index">
+      <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'grandMosqueCount', $event)">{{row.grandMosqueCount}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'mosqueCount', $event)">{{row.mosqueCount}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'islamicCenterCount', $event)">{{row.islamicCenterCount}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'quranicSchoolCount', $event)">{{row.quranicSchoolCount}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'religiousSchoolCount', $event)">{{row.religiousSchoolCount}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'zaouiaCount', $event)">{{row.zaouiaCount}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'otherReligiousInstitutionCount', $event)">{{row.otherReligiousInstitutionCount}}</td>
+    </tr>
+    <tr >
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{SecondgrandMosqueCount}}</td>
+      <td>{{SecondmosqueCount}}</td>
+      <td>{{SecondislamicCenterCount}}</td>
+      <td>{{SecondquranicSchoolCount}}</td>
+      <td>{{SecondreligiousSchoolCount}}</td>
+      <td>{{SecondzaouiaCount}}</td>
+      <td>{{SecondotherReligiousInstitutionCount}}</td>
+    </tr>
+  </table>
+ </main>

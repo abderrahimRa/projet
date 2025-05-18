@@ -1,0 +1,62 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">university residences</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="7">University residences</th>
+    </tr>
+    <tr>
+      <th>Number of residence halls</th>
+      <th>Number of accommodation beds</th>
+      <th>Total Resident Students</th>
+      <th>Accommodation capacity utilization rate (%)</th>
+      <th>Number of restaurants</th>
+      <th>Capacity</th>
+      <th>Utilization rate (%)</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numResidenceHalls', $event)">{{row.numResidenceHalls}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numAccommodationBeds', $event)">{{row.numAccommodationBeds}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'totalResidentStudents', $event)">{{row.totalResidentStudents}}</td>
+      <td>{{row.accommodationUtilRate | number:'1.2-2'}}%</td>
+      <td contenteditable="true" (input)="updateCell(i, 'NumRestaurants', $event)">{{row.NumRestaurants}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'capacity', $event)">{{row.capacity}}</td>
+      <td>{{row.utilizationRate | number:'1.2-2'}}%</td>
+    </tr>
+  </table>
+  <div class="charts-container">
+    <div class="chart-wrapper">
+      <canvas id="stateChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="accommodationChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="restaurantChart"></canvas>
+    </div>
+  </div>
+ </main>

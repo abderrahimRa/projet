@@ -1,0 +1,119 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Industrial zone</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+      <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+        <tr>
+          <th rowspan="2">Code</th>
+          <th rowspan="2">State</th>
+          <th rowspan="2">Number of Industrial Zones</th>
+          <th colspan="2">Area</th>
+          <th colspan="2">Enterprise</th>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <th>Ocupied</th>
+          <th>Total</th>
+          <th>Active</th>
+        </tr>
+        <tr *ngFor="let row of tableData; let i = index">
+          <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{ row.code }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{ row.state }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'numIndZone', $event)">{{ row.numIndZone }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'totalArea', $event)">{{ row.totalArea }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'occupiedArea', $event)">{{ row.occupiedArea }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'totalEnterp', $event)">{{ row.totalEnterp }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'activeEnterp', $event)">{{ row.activeEnterp }}</td>
+        </tr>
+      </table>
+    
+      <div class="button-container">
+        <button (click)="toggleDetailTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveAllData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+    
+      <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+        <tr>
+          <th rowspan="2">Code</th>
+          <th rowspan="2">State</th>
+          <th rowspan="2">Number of Industrial Zones</th>
+          <th colspan="2">Area</th>
+          <th colspan="2">Enterprise</th>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <th>Ocupied</th>
+          <th>Total</th>
+          <th>Active</th>
+        </tr>
+    
+        <tr>
+          <td colspan="7" class="daira">Daira: Bouira</td>
+        </tr>
+        <tr *ngFor="let Frow of FirstData; let i = index">
+          <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{ Frow.code }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{ Frow.state }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'numIndZone', $event)">{{ Frow.numIndZone }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'totalArea', $event)">{{ Frow.totalArea }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'occupiedArea', $event)">{{ Frow.occupiedArea }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'totalEnterp', $event)">{{ Frow.totalEnterp }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'activeEnterp', $event)">{{ Frow.activeEnterp }}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="total">Total Daira:</td>
+          <td>{{ FirstNumIndZone }}</td>
+          <td>{{ FirstTotalArea }}</td>
+          <td>{{ FirstOccupiedArea }}</td>
+          <td>{{ FirstTotalEnterp }}</td>
+          <td>{{ FirstActiveEnterp }}</td>
+        </tr>
+    
+        <tr>
+          <td colspan="7" class="daira">Daira: Sour el ghozlane</td>
+        </tr>
+        <tr *ngFor="let Srow of SecondData; let i = index">
+          <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{ Srow.code }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{ Srow.state }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'numIndZone', $event)">{{ Srow.numIndZone }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'totalArea', $event)">{{ Srow.totalArea }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'occupiedArea', $event)">{{ Srow.occupiedArea }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'totalEnterp', $event)">{{ Srow.totalEnterp }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'activeEnterp', $event)">{{ Srow.activeEnterp }}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="total">Total Daira:</td>
+          <td>{{ SecondNumIndZone }}</td>
+          <td>{{ SecondTotalArea }}</td>
+          <td>{{ SecondOccupiedArea }}</td>
+          <td>{{ SecondTotalEnterp }}</td>
+          <td>{{ SecondActiveEnterp }}</td>
+        </tr>
+      </table>
+ 

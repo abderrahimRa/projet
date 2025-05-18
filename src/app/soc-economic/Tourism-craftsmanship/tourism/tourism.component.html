@@ -1,0 +1,135 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Tourism</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="6">Tourism</th>
+    </tr>
+    <tr>    
+      <th>Number of Hotels (Public + Private)</th>
+      <th>Number of Rooms</th>
+      <th>Number of Beds</th>
+      <th>Number of Spas</th>
+      <th>Number of Tourism Development Zones (ZET)</th>
+      <th>Number of Travel Agencies</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{ row.code }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{ row.state }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numHotels', $event)">{{ row.numHotels }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numRooms', $event)">{{ row.numRooms }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numBeds', $event)">{{ row.numBeds }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numSpas', $event)">{{ row.numSpas }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numTourismDevZones', $event)">{{ row.numTourismDevZones }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numTravelAgencies', $event)">{{ row.numTravelAgencies }}</td>
+    </tr>
+  </table>
+
+  <div class="button-container">
+    <button (click)="toggleDetailTable()" class="tabButton">
+      summary status of the State
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel"   (click)="saveAllData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+
+  
+  <table id="detail" class="tab"  [ngClass]="{ 'hidden': isDetailTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="6">Tourism</th>
+    </tr>
+    <tr>
+      <th>Number of Hotels (Public + Private)</th>
+      <th>Number of Rooms</th>
+      <th>Number of Beds</th>
+      <th>Number of Spas</th>
+      <th>Number of Tourism Development Zones (ZET)</th>
+      <th>Number of Travel Agencies</th>
+    </tr>
+    <tr>
+      <td colspan="8" class="daira">Daira: Bouira</td>
+    </tr>
+    <tr *ngFor="let row of FirstData; let i = index">
+      <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{ row.code }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{ row.state }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numHotels', $event)">{{ row.numHotels }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numRooms', $event)">{{ row.numRooms }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numBeds', $event)">{{ row.numBeds }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numSpas', $event)">{{ row.numSpas }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numTourismDevZones', $event)">{{ row.numTourismDevZones }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numTravelAgencies', $event)">{{ row.numTravelAgencies }}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{ FirstNumHotels }}</td>
+      <td>{{ FirstNumRooms }}</td>
+      <td>{{ FirstNumBeds }}</td>
+      <td>{{ FirstNumSpas }}</td>
+      <td>{{ FirstNumTourismDevZones }}</td>
+      <td>{{ FirstNumTravelAgencies }}</td>
+    </tr>
+
+    <tr>
+      <td colspan="8" class="daira">Daira: Sour el ghozlane</td>
+    </tr>
+    <tr *ngFor="let row of SecondData; let i = index">
+      <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{ row.code }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{ row.state }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numHotels', $event)">{{ row.numHotels }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numRooms', $event)">{{ row.numRooms }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numBeds', $event)">{{ row.numBeds }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numSpas', $event)">{{ row.numSpas }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numTourismDevZones', $event)">{{ row.numTourismDevZones }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numTravelAgencies', $event)">{{ row.numTravelAgencies }}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{ SecondNumHotels }}</td>
+      <td>{{ SecondNumRooms }}</td>
+      <td>{{ SecondNumBeds }}</td>
+      <td>{{ SecondNumSpas }}</td>
+      <td>{{ SecondNumTourismDevZones }}</td>
+      <td>{{ SecondNumTravelAgencies }}</td>
+    </tr>
+  </table>
+  <div class="charts-container">
+    <div class="chart-wrapper">
+      <canvas id="stateChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="accommodationChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="tourismServicesChart"></canvas>
+    </div>
+  </div>
+ </main>

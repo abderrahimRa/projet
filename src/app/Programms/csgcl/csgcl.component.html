@@ -1,0 +1,90 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">CSGCL</h2>
+  <h3>click on the cell you want to modify</h3>
+  
+  <div class="button-container">
+    <button (click)="toggleTable()" class="tabButton">
+      summary status of the State
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel1()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+
+  <table id="PopulationTable" class="tab" [ngClass]="{ hidden: isTableHidden }">
+      <tr>
+        <th rowspan="2">sub-sector</th>
+        <th colspan="2">2022</th>
+        <th colspan="2">2023</th>
+        <th rowspan="2">Observation</th>
+      </tr>
+      <tr>
+        <th>Project Count</th>
+        <th>Project Cost</th>
+        <th>Project Count</th>
+        <th>Project Cost</th>
+      </tr>
+      <tr *ngFor="let row of tableData; let i = index">
+        <td contenteditable="true" (blur)="updateCell(i, 'subsector', $event)">{{row.subsector}}</td>
+        <td contenteditable="true" (blur)="updateCell(i, 'numProject22', $event)">{{row.numProject22}}</td>
+        <td contenteditable="true" (blur)="updateCell(i, 'projectCost22', $event)">{{row.projectCost22}}</td>
+        <td contenteditable="true" (blur)="updateCell(i, 'numProject23', $event)">{{row.numProject23}}</td>
+        <td contenteditable="true" (blur)="updateCell(i, 'projectCost23', $event)">{{row.projectCost23}}</td>
+        <td contenteditable="true" (blur)="updateCell(i, 'Observation', $event)">{{row.Observation}}</td>
+      </tr>
+  </table>
+
+  <div class="row-actions">
+    <div *ngFor="let row of tableData; let i = index" class="row-action">
+      <button (click)="copyRow(i)">Copy Row {{i + 1}}</button>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button (click)="toggleDetailTable()" class="tabButton">
+      Summary Status of the State
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcell">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcell" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+  
+  <div *ngIf="copiedRows.length > 0" class="copied-rows">
+    <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+      <tr>
+        <th rowspan="2">sub-sector</th>
+        <th colspan="2">2022</th>
+        <th colspan="2">2023</th>
+        <th rowspan="2">Observation</th>
+        <th rowspan="2">Copied At</th>
+      </tr>
+      <tr>
+        <th>Project Count</th>
+        <th>Project Cost</th>
+        <th>Project Count</th>
+        <th>Project Cost</th>
+      </tr>
+      <tr *ngFor="let row of copiedRows; let i = index">
+        <td>{{row.subsector}}</td>
+        <td>{{row.numProject22}}</td>
+        <td>{{row.projectCost22}}</td>
+        <td>{{row.numProject23}}</td>
+        <td>{{row.projectCost23}}</td>
+        <td>{{row.Observation}}</td>
+        <td>{{row.timestamp}}
+          <button (click)="deleteCopiedRow(i)">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </div>

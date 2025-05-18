@@ -1,0 +1,135 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Hydraulic</h2>
+      <h3>click on the cell you want to modify</h3>
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+<table id="PopulationTable" [ngClass]="{ 'hidden': isTableHidden }">
+  <tr>
+    <th rowspan="2">Code</th>
+    <th rowspan="2">State</th>
+    <th colspan="2">Barrages</th>
+    <th colspan="2">Hill reservoirs</th>
+    <th colspan="2">Drilling</th>
+    <th rowspan="2">Avg water supply (L/D/inhab)</th>
+    <th colspan="2">AEP</th>
+    <th rowspan="2">Wastewater plants</th>
+    <th rowspan="2">Wastewater connection (%)</th>
+    <th colspan="2">Desalination plants</th>
+  </tr>
+  <tr>
+    <th>Number</th>
+    <th>Capacity</th>
+    <th>Number</th>
+    <th>Capacity</th>
+    <th>Number</th>
+    <th>Capacity</th>
+    <th>Connection rate (%)</th>
+    <th>Network loss (%)</th>
+    <th>Number</th>
+    <th>Capacity</th>
+  </tr>
+
+  <tr *ngFor="let row of tableData; let i = index">
+    <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{row.code}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{row.state}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'numBarrages', $event)">{{row.numBarrages}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'barragesCapacity', $event)">{{row.barragesCapacity}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'numHillReservoirs', $event)">{{row.numHillReservoirs}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'hillReservoirsCapacity', $event)">{{row.hillReservoirsCapacity}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'numDrillings', $event)">{{row.numDrillings}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'drillingCapacity', $event)">{{row.drillingCapacity}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'avgWaterSupplyPerCapita', $event)">{{row.avgWaterSupplyPerCapita}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'connectionRate', $event)">{{row.connectionRate}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'networkLossRate', $event)">{{row.networkLossRate}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'numWastewaterPlants', $event)">{{row.numWastewaterPlants}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'wastewaterConnectionRate', $event)">{{row.wastewaterConnectionRate}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'numDesalinationPlants', $event)">{{row.numDesalinationPlants}}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'desalinationCapacity', $event)">{{row.desalinationCapacity}}</td>
+  </tr>
+  </table>
+
+  <div class="button-container">
+    <button (click)="toggleDetailTable()" class="tabButton">
+      situation of seawater desalination stations
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel"   (click)="saveAllData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+  <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+    <tr>
+      <th colspan="9" class="daira">Active stations</th>
+    </tr>
+    <tr>
+      <th>Code</th>
+      <th>State</th>
+      <th>localisation</th>
+      <th>Production Cost</th>
+      <th>Year of commissioning</th>
+      <th>Production Capacity</th>
+      <th>beneficiary states</th>
+      <th>Number of beneficiary districts</th>
+      <th>Observations</th>
+    </tr>
+
+    <tr *ngFor="let row of FirstData; let i = index">
+      <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{ row.code }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{ row.state }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'localisation', $event)">{{ row.localisation }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'productionCost', $event)">{{ row.productionCost }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'commissioningYear', $event)">{{ row.commissioningYear }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'productionCapacity', $event)">{{ row.productionCapacity }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'beneficiaryStates', $event)">{{ row.beneficiaryStates }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numBeneficiaryDistricts', $event)">{{ row.numBeneficiaryDistricts }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'Observations', $event)">{{ row.Observations }}</td>
+    </tr>
+    <tr>
+      <td colspan="9" class="daira">stations under construction</td>
+    </tr>
+
+    <tr>
+      <th>Code</th>
+      <th>State</th>
+      <th>localisation</th>
+      <th>Production Cost</th>
+      <th>Year of commissioning</th>
+      <th>Production Capacity</th>
+      <th>beneficiary states</th>
+      <th>Number of beneficiary districts</th>
+      <th>Observations</th>
+    </tr>
+
+   
+    <tr *ngFor="let row of SecondData; let i = index">
+      <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{ row.code }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{ row.state }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'localisation', $event)">{{ row.localisation }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'productionCost', $event)">{{ row.productionCost }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'commissioningYear', $event)">{{ row.commissioningYear }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'productionCapacity', $event)">{{ row.productionCapacity }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'beneficiaryStates', $event)">{{ row.beneficiaryStates }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numBeneficiaryDistricts', $event)">{{ row.numBeneficiaryDistricts }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'Observations', $event)">{{ row.Observations }}</td>
+    </tr>
+  </table>
+</main>

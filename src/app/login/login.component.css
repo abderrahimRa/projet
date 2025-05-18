@@ -1,0 +1,234 @@
+/* Font imports and base styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  background-image: url('./Min.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+}
+
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px outset black;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  width: 300px;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(7px);
+  font-family: "Poppins", sans-serif;
+}
+
+h2 {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 30px;
+  color: black;
+}
+
+/* Input group styles */
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 35px;
+  border-bottom: 2px solid black;
+}
+
+.input-group input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: black;
+  font-family: "Roboto", serif;
+  padding-left: 5px;
+  font-size: 1em;
+}
+
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: black;
+  font-size: 1em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
+  top: -5px;
+  font-size: 0.8em;
+}
+
+/* Icon positioning */
+.input-group .icon {
+  position: absolute;
+  font-size: 1.5em;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Error states */
+.input-group input.invalid {
+  border-bottom-color: #ff4444;
+}
+
+.input-group input.invalid ~ label {
+  color: #ff4444;
+}
+
+.error-hint {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff4444;
+  font-size: 1.2em;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.9em;
+  text-align: center;
+  margin-bottom: 15px;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Button styles */
+.login-button {
+  width: 70%;
+  height: 40px;
+  margin-top: 15px;
+  border-radius: 40px;
+  font-size: 0.94em;
+  background-color: transparent;
+  border: 2px solid black;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Poppins", sans-serif;
+}
+
+.login-button:hover:not([disabled]) {
+  background-color: black;
+  color: white;
+  border-color: white;
+  transform: translateY(-2px);
+}
+
+.login-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  border-top-color: black;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Placeholder styling */
+.input-group input::placeholder {
+  color: transparent;
+}
+
+.input-group input:focus::placeholder {
+  color: #aaa;
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .login-container {
+    width: 90%;
+    max-width: 300px;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+}
+
+.input-group select {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: black;
+  font-family: "Roboto", serif;
+  padding-left: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: relative;
+  z-index: 1;
+}
+
+.input-group select:focus {
+  outline: none;
+}
+
+.input-group select.invalid {
+  border-bottom-color: #ff4444;
+}
+
+.input-group select + label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: black;
+  font-size: 1em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.input-group select:focus ~ label,
+.input-group select:not([value=""]) ~ label {
+  top: -5px;
+  font-size: 0.8em;
+}
+
+.input-group select.invalid ~ label {
+  color: #ff4444;
+}
+
+/* Add a custom dropdown arrow */
+.input-group select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 40px center;
+  background-size: 20px;
+  padding-right: 60px;
+}

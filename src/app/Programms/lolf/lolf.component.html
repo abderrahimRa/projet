@@ -1,0 +1,119 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">LOLF</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          Investment Operation LOLF
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+
+  <table id="PopulationTable" class="tab" [ngClass]="{ hidden: isTableHidden }">
+    <tr>
+      <th rowspan="2">Envelope</th>
+      <th rowspan="2">Program/subprogram</th>
+      <th rowspan="2">Sub-sector (for information purposes)</th>
+      <th rowspan="2">Operation Description</th>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">Year of notification by the MF</th>
+      <th colspan="3">Commitment Authorization</th>
+      <th rowspan="2">Available CP as of 12/31/2023</th>
+      <th rowspan="2">Cumulative expenditures as of 12/31/2023 (2)</th>
+      <th rowspan="2">PEC (1)-(2)</th>
+      <th rowspan="2">Physical completion rate</th>
+      <th rowspan="2">Observation</th>
+      </tr>
+      <tr>
+        <th >Initial AE (thousands of DA)</th>
+        <th >Current AE (1) (thousands of DA)</th>
+        <th >Cumulative commitments as of 12/31/2023 (thousands of DA)</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (blur)="updateCell(i, 'Envelope', $event)">{{row.Envelope}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'Program', $event)">{{row.Program}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'subsector', $event)">{{row.subsector}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'OperationDescription', $event)">{{row.OperationDescription}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'Code', $event)">{{row.Code}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'YearNotifMF', $event)">{{row.YearNotifMF}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'InitialAE', $event)">{{row.InitialAE}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'CurrentAE', $event)">{{row.CurrentAE}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'CumulativeCommitments', $event)">{{row.CumulativeCommitments}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'AvailableCP', $event)">{{row.AvailableCP}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'CumulativeExpenditures', $event)">{{row.CumulativeExpenditures}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'PEC', $event)">{{row.PEC}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'PhysicalCompletionRate', $event)">{{row.PhysicalCompletionRate}}</td>
+      <td contenteditable="true" (blur)="updateCell(i, 'Observation', $event)">{{row.Observation}}</td>
+    </tr>
+  </table>
+
+  <div class="row-actions">
+    <div *ngFor="let row of tableData; let i = index" class="row-action">
+      <button (click)="copyRow(i)">Copy Row {{i + 1}}</button>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button (click)="toggleDetailTable()" class="tabButton">
+      Summary Status of the State
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcell" >
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcell" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+  
+  <div  *ngIf="copiedRows.length > 0" class="copied-rows">
+    <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+      <tr>
+        <th rowspan="2">Envelope</th>
+        <th rowspan="2">Program/subprogram</th>
+        <th rowspan="2">Sub-sector (for information purposes)</th>
+        <th rowspan="2">Operation Description</th>
+        <th rowspan="2">Code</th>
+        <th rowspan="2">Year of notification by the MF</th>
+        <th colspan="3">Commitment Authorization</th>
+        <th rowspan="2">Available CP as of 12/31/2023</th>
+        <th rowspan="2">Cumulative expenditures as of 12/31/2023 (2)</th>
+        <th rowspan="2">PEC (1)-(2)</th>
+        <th rowspan="2">Physical completion rate</th>
+        <th rowspan="2">Observation</th>
+        <th rowspan="2">Copied At</th>
+      </tr>
+      <tr>
+        <th>Initial AE (thousands of DA)</th>
+        <th>Current AE (1) (thousands of DA)</th>
+        <th>Cumulative commitments as of 12/31/2023 (thousands of DA)</th>
+      </tr>
+      <tr *ngFor="let row of copiedRows; let i = index">
+        <td>{{row.Envelope}}</td>
+        <td>{{row.Program}}</td>
+        <td>{{row.subsector}}</td>
+        <td>{{row.OperationDescription}}</td>
+        <td>{{row.Code}}</td>
+        <td>{{row.YearNotifMF}}</td>
+        <td>{{row.InitialAE}}</td>
+        <td>{{row.CurrentAE}}</td>
+        <td>{{row.CumulativeCommitments}}</td>
+        <td>{{row.AvailableCP}}</td>
+        <td>{{row.CumulativeExpenditures}}</td>
+        <td>{{row.PEC}}</td>
+        <td>{{row.PhysicalCompletionRate}}</td>
+        <td>{{row.Observation}}</td>
+        <td>{{row.timestamp}}<button (click)="deleteCopiedRow(i)">Delete</button></td>
+      </tr>
+    </table>
+  </div>
+ </main>

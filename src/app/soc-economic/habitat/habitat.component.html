@@ -1,0 +1,163 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Habitat</h2>
+  <h3>click on the cell you want to modify</h3>
+
+  <div class="button-container">
+    <button (click)="toggleTable()" class="tabButton">
+      summary status of the State
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel"   (click)="saveTableData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel1()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="3">Housing Stock</th>
+      <th colspan="6">Housing by Type</th>
+      <th rowspan="2">Housing Occupancy Rate (TOL) (House/Log)</th>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <th>Urban</th>
+      <th>Rural</th>
+      <th>Number of Social Housing</th>
+      <th>Number of Participatory Housing</th>
+      <th>Number of Rental/Sale Housing</th>
+      <th>Developmental Housing</th>
+      <th>Number of LPP Housing</th>
+      <th>Number of Precarious Housing</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'totalHousing', $event)">{{row.totalHousing}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'urbanHousing', $event)">{{row.urbanHousing}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'ruralHousing', $event)">{{row.ruralHousing}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numSocialHousing', $event)">{{row.numSocialHousing}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numParticipatoryHousing', $event)">{{row.numParticipatoryHousing}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numRentalSaleHousing', $event)">{{row.numRentalSaleHousing}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'developmentalHousing', $event)">{{row.developmentalHousing}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'lppHousing', $event)">{{row.lppHousing}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numPrecariousHousing', $event)">{{row.numPrecariousHousing}}</td>
+      <td>{{row.housingOccupancyRate}}</td>
+    </tr>
+  </table>
+
+  <div class="button-container">
+        <button (click)="toggleDetailTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveAllData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+
+  <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="3">Housing Stock</th>
+      <th colspan="6">Housing by Type</th>
+      <th rowspan="2">Housing Occupancy Rate (TOL) (House/Log)</th>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <th>Urban</th>
+      <th>Rural</th>
+      <th>Number of Social Housing</th>
+      <th>Number of Participatory Housing</th>
+      <th>Number of Rental/Sale Housing</th>
+      <th>Developmental Housing</th>
+      <th>Number of LPP Housing</th>
+      <th>Number of Precarious Housing</th>
+    </tr>
+    <tr >
+      <td colspan="12" class="daira">Daira: Bouira</td>
+    </tr>
+    <tr *ngFor="let row of FirstData; let i = index">
+      <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'totalHousing', $event)">{{row.totalHousing}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'urbanHousing', $event)">{{row.urbanHousing}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'ruralHousing', $event)">{{row.ruralHousing}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numSocialHousing', $event)">{{row.numSocialHousing}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numParticipatoryHousing', $event)">{{row.numParticipatoryHousing}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numRentalSaleHousing', $event)">{{row.numRentalSaleHousing}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'developmentalHousing', $event)">{{row.developmentalHousing}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'lppHousing', $event)">{{row.lppHousing}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numPrecariousHousing', $event)">{{row.numPrecariousHousing}}</td>
+      <td>{{row.housingOccupancyRate}}</td>
+    </tr>
+    <tr >
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{FirstotalHousing}}</td>
+      <td>{{FirsturbanHousing}}</td>
+      <td>{{FirstruralHousing}}</td>
+      <td>{{FirstnumSocialHousing}}</td>
+      <td>{{FirstnumParticipatoryHousing}}</td>
+      <td>{{FirstnumRentalSaleHousing}}</td>
+      <td>{{FirstdevelopmentalHousing}}</td>
+      <td>{{FirstlppHousing}}</td>
+      <td>{{FirstnumPrecariousHousing}}</td>
+      <td>{{FirsthousingOccupancyRate}}</td>
+    </tr>
+    
+    <tr >
+      <td colspan="12" class="daira">Daira: Sour el ghozlane</td>
+    </tr>
+    <tr *ngFor="let row of SecondData; let i = index">
+      <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'totalHousing', $event)">{{row.totalHousing}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'urbanHousing', $event)">{{row.urbanHousing}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'ruralHousing', $event)">{{row.ruralHousing}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numSocialHousing', $event)">{{row.numSocialHousing}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numParticipatoryHousing', $event)">{{row.numParticipatoryHousing}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numRentalSaleHousing', $event)">{{row.numRentalSaleHousing}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'developmentalHousing', $event)">{{row.developmentalHousing}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'lppHousing', $event)">{{row.lppHousing}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numPrecariousHousing', $event)">{{row.numPrecariousHousing}}</td>
+      <td>{{row.housingOccupancyRate}}</td>
+    </tr>
+    <tr >
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{SecondtotalHousing}}</td>
+      <td>{{SecondurbanHousing}}</td>
+      <td>{{SecondruralHousing}}</td>
+      <td>{{SecondnumSocialHousing}}</td>
+      <td>{{SecondnumParticipatoryHousing}}</td>
+      <td>{{SecondnumRentalSaleHousing}}</td>
+      <td>{{SeconddevelopmentalHousing}}</td>
+      <td>{{SecondlppHousing}}</td>
+      <td>{{SecondnumPrecariousHousing}}</td>
+      <td>{{SecondhousingOccupancyRate}}</td>
+    </tr>
+  </table>
+  <div class="charts-container">
+    <div class="chart-container">
+      <h3>Housing Overview</h3>
+      <canvas id="stateChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h3>Daira Comparison</h3>
+      <canvas id="dairaTotalsChart"></canvas>
+    </div>
+  </div>
+</main>

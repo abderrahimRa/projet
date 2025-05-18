@@ -1,0 +1,226 @@
+<nav id="sidebar" [ngClass]="{ 'close': isSidebarClosed }">
+    <ul>
+      <li class="open">
+        <button (click)="toggleSidebar()" id="toggle-button">
+          <ion-icon name="grid"></ion-icon>
+        </button>
+        <span class="logo">statistic directory</span>
+         
+      </li>
+      <li>
+        <form>
+          <div class="search">
+            <ion-icon (click)="toggleSubMenu($event)" name="search-outline"></ion-icon>
+            <input class="srch" type="search" placeholder="Search">
+          </div>
+        </form>
+      </li><div *ngIf="isAdmin">
+      <li class="active">
+        <a (click)="GoToAdmin()">
+          <ion-icon name="logo-angular"></ion-icon>
+          <span>Admin</span>
+        </a>
+      </li></div>
+      <li class="active">
+        <a (click)="GoToGenData()">
+          <ion-icon name="file-tray-full"></ion-icon>
+          <span>General Data</span>
+        </a>
+      </li>
+      <li class="active">
+        <a (click)="GoToPopu()">
+          <ion-icon name="people"></ion-icon>
+          <span>Population</span>
+        </a>
+      </li>
+      <li class="active">
+        <a (click)="GoToEmploy()">
+          <ion-icon name="calendar"></ion-icon>
+          <span>Schedule</span>
+        </a>
+      </li>
+      <li>
+        <button (click)="toggleSubMenu($event)" class="dropdown">
+          <ion-icon name="documents"></ion-icon>
+          <span>soc-economic</span>
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <ul class="sub">
+          <div>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>Industry</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToIndus()">Industrial Zone</a></li>
+                  <li><a (click)="GoToActi()">Activity Zone</a></li>
+                </div>
+              </ul>
+            </li>
+            <li><a (click)="GoToHydraulic()">Hydraulic</a></li>
+            <li><a (click)="GoToAgri()">Agriculture</a></li>
+            <li><a (click)="GoToForests()">Forests</a></li>
+            <li><a (click)="GoToFishing()">Fishing</a></li>
+            <li><a (click)="GoToEnergy()">Energy</a></li>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>Tourism and craftsmanship</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToTourism()">Tourism</a></li>
+                  <li><a (click)="GoToCraftsmanship()">Craftsmanship</a></li>
+                </div>
+              </ul></li>
+            <li><a (click)="GoToEnvironment()">Envirement</a></li>
+            <li><a (click)="GoToPostTele()">Posts and telecomunication</a></li>
+            <li><a (click)="GoToCommerce()">Commerce</a></li>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>Transport</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToUrban()">Urban and Suburban</a></li>
+                  <li><a (click)="GoToRailway()">Railway Network</a></li>
+                  <li><a (click)="GoToPorts()">Ports</a></li>
+                  <li><a (click)="GoToAirports()">Airports</a></li>
+                </div>
+              </ul>
+            </li>
+            <li><a (click)="GoToRoads()">Roads</a></li>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>Education</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToPrimary()">Primary</a></li>
+                  <li><a (click)="GoToMiddle()">Middle</a></li>
+                  <li><a (click)="GoToSecondary()">Secondary</a></li>
+                </div>
+              </ul>
+            </li>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>Higher Education</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToUniversities()">Universities</a></li>
+                  <li><a (click)="GoToSchoolnInstitutes()">Schools and Institutes</a></li>
+                  <li><a (click)="GoToUniResidences()">University Residences</a></li>
+                </div>
+              </ul>
+            </li>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>Professional Formation</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToINSFP()">INSFP</a></li>
+                  <li><a (click)="GoToIEP()">IEP</a></li>
+                  <li><a (click)="GoToCFPA()">CFPA</a></li>
+                  <li><a (click)="GoToBoardingSchool()">Boarding School Capacity</a></li>
+                </div>
+              </ul>
+            </li>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>Health</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToPublicInfrastructure()">Public Infrastructure</a></li>
+                  <li><a (click)="GoToPrivateInfrastructure()">Private Infrastructure</a></li>
+                  <li><a (click)="GoToMedicalEquip()">Medical Equipment</a></li>
+                  <li><a (click)="GoToParamedic()">Paramedics</a></li>
+                  <li><a (click)="GoToRatio()">Ratios</a></li>
+                </div>
+              </ul>
+            </li>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>Youth and Sports</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToYouth()">Youth</a></li>
+                  <li><a (click)="GoToSports()">Sports</a></li>
+                </div>
+              </ul>
+            </li>
+            <li><a (click)="GoToSocialProtection()">Social Protection</a></li>
+            <li><a (click)="GoToHabitat()">Habitat</a></li>
+            <li><a (click)="GoToCulture()">Culture</a></li>
+            <li><a (click)="GoToWorship()">Worship</a></li>
+            <li><a (click)="GoToMujahideen()">Mujahideen</a></li>
+          </div>
+        </ul>
+      </li>
+      <li>
+        <button (click)="toggleSubMenu($event)" class="dropdown">
+          <ion-icon name="pie-chart"></ion-icon>
+          <span>Programms</span>
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <ul class="sub">
+          <div>
+            <li><a (click)="GoToLolf()">LOLF</a></li>
+            <li><a (click)="GoToPsc()">EX-PSC</a></li>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>EX-PSD</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToNormal()">Normal</a></li>
+                  <li><a (click)="GoToPhp()">PHP</a></li>
+                  <li><a (click)="GoToSud()">SUD</a></li>
+                </div>
+              </ul>
+            </li>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>EX-FONDS</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToFsehp()">F.S.E.H.P</a></li>
+                  <li><a (click)="GoToFsdrs()">F.S.D.R.S</a></li>
+                </div>
+              </ul>
+            </li>
+            <li>
+              <button (click)="toggleSubMenu($event)" class="dropdown">
+                <span>PCD</span>
+                <ion-icon class="rot" name="chevron-down"></ion-icon>
+              </button>
+              <ul class="sub">
+                <div class="secondSub">
+                  <li><a (click)="GoToPcd23()">PCD 2023 (T4)</a></li>
+                  <li><a (click)="GoToPec()">PEC (EX PCD)</a></li>
+                  <li><a (click)="GoToGrayArea()">Gray area</a></li>
+                </div>
+              </ul>
+            </li>
+            <li><a (click)="GoToCsgcl()">CSGCL</a></li>
+            <li><a (click)="GoToState()">State Budget</a></li>
+            <li><a (click)="GoToDistrict()">District Budget</a></li>
+          </div>
+        </ul>
+      </li>
+    </ul>
+  </nav>

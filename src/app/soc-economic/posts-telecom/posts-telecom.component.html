@@ -1,0 +1,142 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Post and Telecommunications</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleDetailTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+      <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+        <tr>
+          <th rowspan="2">Code</th>
+          <th rowspan="2">State</th>
+          <th colspan="7">Post & Telecommunications</th>
+        </tr>
+        <tr>
+          <th>Number of Post Offices in Operation</th>
+          <th>Post Office Agencies</th>
+          <th>Postal Density</th>
+          <th>Telephone Exchange Capacity</th>
+          <th>Number of Subscribers</th>
+          <th>Telephone Density</th>
+          <th>Fiber Optic Connection Rate (%)</th>
+        </tr>
+        <tr *ngFor="let row of tableData; let i = index">
+          <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{ row.code }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{ row.state }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'numPostOffices', $event)">{{ row.numPostOffices }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'postOfficeAgencies', $event)">{{ row.postOfficeAgencies }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'postalDensity', $event)">{{ row.postalDensity }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'telephoneExchangeCapacity', $event)">{{ row.telephoneExchangeCapacity }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'numSubscribers', $event)">{{ row.numSubscribers }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'telephoneDensity', $event)">{{ row.telephoneDensity }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'fiberConnectionRate', $event)">{{ row.fiberConnectionRate }}</td>
+        </tr>
+      </table>
+    
+      <div class="button-container">
+        <button (click)="toggleDetailTable()" class="tabButton">
+          Detail per town
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="saveAllData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel2()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+    
+      <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+        <tr>
+          <th rowspan="2">Code</th>
+          <th rowspan="2">State</th>
+          <th colspan="7">Post & Telecommunications</th>
+        </tr>
+        <tr>
+          <th>Number of Post Offices in Operation</th>
+          <th>Post Office Agencies</th>
+          <th>Postal Density</th>
+          <th>Telephone Exchange Capacity</th>
+          <th>Number of Subscribers</th>
+          <th>Telephone Density</th>
+          <th>Fiber Optic Connection Rate (%)</th>
+        </tr>
+    
+        <tr>
+          <td colspan="9" class="daira">Daira: Bouira</td>
+        </tr>
+        <tr *ngFor="let row of FirstData; let i = index">
+          <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{ row.code }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{ row.state }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'numPostOffices', $event)">{{ row.numPostOffices }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'postOfficeAgencies', $event)">{{ row.postOfficeAgencies }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'postalDensity', $event)">{{ row.postalDensity }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'telephoneExchangeCapacity', $event)">{{ row.telephoneExchangeCapacity }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'numSubscribers', $event)">{{ row.numSubscribers }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'telephoneDensity', $event)">{{ row.telephoneDensity }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'fiberConnectionRate', $event)">{{ row.fiberConnectionRate }}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="total">Total Daira:</td>
+          <td>{{ FirstNumPostOffices }}</td>
+          <td>{{ FirstPostOfficeAgencies }}</td>
+          <td>{{ FirstPostalDensity }}</td>
+          <td>{{ FirstTelephoneExchangeCapacity }}</td>
+          <td>{{ FirstNumSubscribers }}</td>
+          <td>{{ FirstTelephoneDensity }}</td>
+          <td>{{ FirstFiberConnectionRate }}</td>
+        </tr>
+
+        <tr>
+          <td colspan="9" class="daira">Daira: Sour el ghozlane</td>
+        </tr>
+        <tr *ngFor="let row of SecondData; let i = index">
+          <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{ row.code }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{ row.state }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'numPostOffices', $event)">{{ row.numPostOffices }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'postOfficeAgencies', $event)">{{ row.postOfficeAgencies }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'postalDensity', $event)">{{ row.postalDensity }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'telephoneExchangeCapacity', $event)">{{ row.telephoneExchangeCapacity }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'numSubscribers', $event)">{{ row.numSubscribers }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'telephoneDensity', $event)">{{ row.telephoneDensity }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'fiberConnectionRate', $event)">{{ row.fiberConnectionRate }}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="total">Total Daira:</td>
+          <td>{{ SecondNumPostOffices }}</td>
+          <td>{{ SecondPostOfficeAgencies }}</td>
+          <td>{{ SecondPostalDensity }}</td>
+          <td>{{ SecondTelephoneExchangeCapacity }}</td>
+          <td>{{ SecondNumSubscribers }}</td>
+          <td>{{ SecondTelephoneDensity }}</td>
+          <td>{{ SecondFiberConnectionRate }}</td>
+        </tr>
+      </table>
+      <div class="charts-container">
+        <div class="chart-wrapper">
+          <canvas id="stateChart"></canvas>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="postalChart"></canvas>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="telecomChart"></canvas>
+        </div>
+      </div>
+ </main>

@@ -1,0 +1,101 @@
+<app-sidebar></app-sidebar>
+<div class="logout-container">
+  <button class="logout-button" (click)="onLogout()">
+    Log out
+  </button>
+</div>
+
+<div class="admin-dashboard">
+  <h2>Admin Dashboard</h2>
+  
+  <div class="stats-card">
+    <h3>Active Users</h3>
+    <div class="count">{{ activeUserCount }}</div>
+    <button (click)="refreshStats()">Refresh</button>
+  </div>
+
+  <div class="user-list" *ngIf="activeUsers.length">
+    <h3>Currently Active:</h3>
+    <ul>
+      <li *ngFor="let user of activeUsers">{{ user }}</li>
+    </ul>
+  </div>
+
+  <!-- User Management Section -->
+  <div class="user-management">
+    <h3>User Management</h3>
+    
+    <!-- Add User Form -->
+    <div class="form-card">
+      <h4>Add New User</h4>
+      <form (ngSubmit)="addUser()" #addUserForm="ngForm">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" 
+                 [(ngModel)]="newUser.username" required 
+                 placeholder="Enter username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" 
+                 [(ngModel)]="newUser.password" required 
+                 placeholder="Enter password">
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" name="role" [(ngModel)]="newUser.role" required>
+            <option value="">Select role</option>
+            <option value="admin">Admin</option>
+            <option value="editor">Editor</option>
+            <option value="viewer">Viewer</option>
+          </select>
+        </div>
+        <button type="submit" [disabled]="!addUserForm.valid">Add User</button>
+      </form>
+    </div>
+
+    <!-- Remove User Form -->
+    <div class="form-card">
+      <h4>Remove User</h4>
+      <form (ngSubmit)="removeUser()" #removeUserForm="ngForm">
+        <div class="form-group">
+          <label for="userToRemove">Select User</label>
+          <select id="userToRemove" name="userToRemove" 
+                  [(ngModel)]="selectedUserToRemove" required>
+            <option value="">Select user to remove</option>
+            <option *ngFor="let user of allUsers" [value]="user.username">
+              {{ user.username }} ({{ user.role }})
+            </option>
+          </select>
+        </div>
+        <button type="submit" [disabled]="!removeUserForm.valid" 
+                class="danger">Remove User</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<h1>Table Structure</h1>
+<table id="PopulationTable" class="tab">
+  <tr>
+    <th rowspan="2">Code</th>
+    <th rowspan="2">State</th>
+    <th colspan="4">Indecator</th>
+    <th rowspan="2">V(n+1)</th>
+  </tr>
+  <tr>
+    <th>V01</th>
+    <th>V02</th>
+    <th>......</th>
+    <th>Vn</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>

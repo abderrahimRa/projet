@@ -1,0 +1,159 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Population per age group</h2>
+      <h3>click on the cell you want to modify</h3>
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+        <button id="exportExcel">
+          <label>
+            <input type="file" (change)="importFromExcel1($event)" accept=".xlsx,.xls" hidden>
+            <ion-icon name="document-attach"></ion-icon> Import
+          </label>
+        </button>
+    </div>
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="7">Population</th>
+    </tr>
+    <tr>
+      <th>Younger than 6 years old</th>
+      <th>From 6 to 15 years old</th>
+      <th>From 16 to 24 years old</th>
+      <th>From 25 to 50 years old</th>
+      <th>From 51 to 60 years old</th>
+      <th>Older than 60</th>
+      <th>Total</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{ row.code }}</td>
+    <td contenteditable="true"  (input)="updateCell(i, 'state', $event)">{{ row.state }}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'youngerThan6', $event)">{{ row.youngerThan6 }}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'from6To15', $event)">{{ row.from6To15 }}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'from16To24', $event)">{{ row.from16To24 }}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'from25To50', $event)">{{ row.from25To50 }}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'from51To60', $event)">{{ row.from51To60 }}</td>
+    <td contenteditable="true" (input)="updateCell(i, 'olderThan60', $event)">{{ row.olderThan60 }}</td>
+  <td>{{ row.total }}</td>
+    </tr>
+  </table>
+  <div class="button-container">
+    <button (click)="toggleDetailTable()" class="tabButton">
+      Detail per town
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel"  (click)="saveAllData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+  <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">Town</th>
+      <th colspan="7">Population</th>
+    </tr>
+    <tr>
+      <th>Younger than 6 years old</th>
+      <th>From 6 to 15 years old</th>
+      <th>From 16 to 24 years old</th>
+      <th>From 25 to 50 years old</th>
+      <th>From 51 to 60 years old</th>
+      <th>Older than 60</th>
+      <th>Total</th>
+    </tr>
+    
+<tr>
+  <td colspan="8" class="daira">Daira: Bouira</td>
+  <td class="daira">
+    <button (click)="fileInput1.click()">
+      <ion-icon name="document-attach"></ion-icon>
+    </button>
+    <input #fileInput1 type="file" (change)="importFirstData($event)" accept=".xlsx,.xls" hidden>
+  </td>
+</tr>
+<tr *ngFor="let bouiraRow of FirstData; let i = index">
+  <td contenteditable="true" (input)="updateBouiraCell(i, 'code', $event)">{{ bouiraRow.code }}</td>
+    <td contenteditable="true"  (input)="updateBouiraCell(i, 'state', $event)">{{ bouiraRow.state }}</td>
+  <td contenteditable="true" (input)="updateBouiraCell(i, 'youngerThan6', $event)">{{ bouiraRow.youngerThan6 }}</td>
+  <td contenteditable="true" (input)="updateBouiraCell(i, 'from6To15', $event)">{{ bouiraRow.from6To15 }}</td>
+  <td contenteditable="true" (input)="updateBouiraCell(i, 'from16To24', $event)">{{ bouiraRow.from16To24 }}</td>
+  <td contenteditable="true" (input)="updateBouiraCell(i, 'from25To50', $event)">{{ bouiraRow.from25To50 }}</td>
+  <td contenteditable="true" (input)="updateBouiraCell(i, 'from51To60', $event)">{{ bouiraRow.from51To60 }}</td>
+  <td contenteditable="true" (input)="updateBouiraCell(i, 'olderThan60', $event)">{{ bouiraRow.olderThan60 }}</td>
+  <td>{{ bouiraRow.total }}</td>
+</tr>
+<tr>
+  <td colspan="2" class="total">Total Daira:</td>
+  <td>{{ totalBouiraYoungerThan6 }}</td>
+  <td>{{ totalBouiraFrom6To15 }}</td>
+  <td>{{ totalBouiraFrom16To24 }}</td>
+  <td>{{ totalBouiraFrom25To50 }}</td>
+  <td>{{ totalBouiraFrom51To60 }}</td>
+  <td>{{ totalBouiraOlderThan60 }}</td>
+  <td>{{ totalBouiraGrandTotal }}</td>
+</tr>
+
+<tr>
+  <td colspan="8" class="daira">Daira: Sour el ghozlane</td>
+  <td class="daira">
+    <button (click)="fileInput2.click()">
+      <ion-icon name="document-attach"></ion-icon>
+    </button>
+    <input #fileInput2 type="file" (change)="importSecondData($event)" accept=".xlsx,.xls" hidden>
+  </td>
+</tr>
+<tr *ngFor="let sourRow of SecondData; let i = index">
+  <td contenteditable="true" (input)="updateSourCell(i, 'code', $event)">{{ sourRow.code }}</td>
+    <td contenteditable="true"  (input)="updateSourCell(i, 'state', $event)">{{ sourRow.state }}</td>
+  <td contenteditable="true" (input)="updateSourCell(i, 'youngerThan6', $event)">{{ sourRow.youngerThan6 }}</td>
+  <td contenteditable="true" (input)="updateSourCell(i, 'from6To15', $event)">{{ sourRow.from6To15 }}</td>
+  <td contenteditable="true" (input)="updateSourCell(i, 'from16To24', $event)">{{ sourRow.from16To24 }}</td>
+  <td contenteditable="true" (input)="updateSourCell(i, 'from25To50', $event)">{{ sourRow.from25To50 }}</td>
+  <td contenteditable="true" (input)="updateSourCell(i, 'from51To60', $event)">{{ sourRow.from51To60 }}</td>
+  <td contenteditable="true" (input)="updateSourCell(i, 'olderThan60', $event)">{{ sourRow.olderThan60 }}</td>
+  <td>{{ sourRow.total }}</td>
+</tr>
+<tr>
+  <td colspan="2" class="total">Total Daira:</td>
+  <td>{{ totalSourYoungerThan6 }}</td>
+  <td>{{ totalSourFrom6To15 }}</td>
+  <td>{{ totalSourFrom16To24 }}</td>
+  <td>{{ totalSourFrom25To50 }}</td>
+  <td>{{ totalSourFrom51To60 }}</td>
+  <td>{{ totalSourOlderThan60 }}</td>
+  <td>{{ totalSourGrandTotal }}</td>
+</tr>
+  </table>
+  <div class="charts-container">
+    <div class="chart-wrapper">
+      <div class="chart-container">
+        <h3>State Population</h3>
+        <canvas id="stateChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-wrapper">
+      <div class="chart-container">
+        <h3>Daira Comparison</h3>
+        <canvas id="dairaTotalsChart"></canvas>
+      </div>
+    </div>
+  </div>
+ </main>

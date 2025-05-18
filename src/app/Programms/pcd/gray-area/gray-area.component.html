@@ -1,0 +1,95 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Gray Areas</h2>
+  <h3>click on the cell you want to modify</h3>
+
+  <div class="button-container">
+    <button (click)="toggleTable()" class="tabButton">
+      summary status of the State
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="saveTableData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel1()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="2">Gray Areas at 31/12/2023</th>
+    </tr>
+    <tr>
+      <th>Total Gray Areas</th>
+      <th>Gray areas concerned by PCD notifications</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{ row.code }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{ row.state }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'totalGrayAreas', $event)">{{ row.totalGrayAreas }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'grayAreasPCD', $event)">{{ row.grayAreasPCD }}</td>
+    </tr>
+  </table>
+
+  <div class="button-container">
+    <button (click)="toggleDetailTable()" class="tabButton">
+      Detail per District
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="saveAllData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+
+  <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="2">Gray Areas at 31/12/2023</th>
+    </tr>
+    <tr>
+      <th>Total Gray Areas</th>
+      <th>Gray areas concerned by PCD notifications</th>
+    </tr>
+    <tr >
+      <td colspan="4" class="daira">Daira: Bouira</td>
+    </tr>
+    <tr *ngFor="let row of FirstData; let i = index">
+      <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{ row.code }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{ row.state }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'totalGrayAreas', $event)">{{ row.totalGrayAreas }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'grayAreasPCD', $event)">{{ row.grayAreasPCD }}</td>
+    </tr>
+    <tr >
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{ FirsttotalGrayAreas }}</td>
+      <td>{{ FirstgrayAreasPCD }}</td>
+    </tr>
+
+    <tr >
+      <td colspan="4" class="daira">Daira: Sour el ghozlane</td>
+    </tr>
+    <tr *ngFor="let row of SecondData; let i = index">
+      <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{ row.code }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{ row.state }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'totalGrayAreas', $event)">{{ row.totalGrayAreas }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'grayAreasPCD', $event)">{{ row.grayAreasPCD }}</td>
+    </tr>
+    <tr >
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{ SecondtotalGrayAreas }}</td>
+      <td>{{ SecondgrayAreasPCD }}</td>
+    </tr>
+  </table>
+</main>

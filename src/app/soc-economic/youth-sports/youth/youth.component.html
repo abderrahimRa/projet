@@ -1,0 +1,166 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Youth</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th rowspan="2">Youth Camps</th>
+      <th rowspan="2">Youth Centers</th>
+      <th rowspan="2">Youth homes</th>
+      <th colspan="2">youth hostels</th>
+      <th colspan="2">Schools, Institutes, or Sports Training Centers</th>
+      <th colspan="3">Associations</th>
+    </tr>
+    <tr>
+      <th>Number</th>
+      <th>Capacity</th>
+      <th>Number</th>
+      <th>Educational Places</th>
+      <th>Number of Sports Associations</th>
+      <th>Number of Active Associations</th>
+      <th>Number of Affiliates (Members)</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'youthCamps', $event)">{{row.youthCamps}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'youthCenters', $event)">{{row.youthCenters}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'youthHomes', $event)">{{row.youthHomes}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numYHotels', $event)">{{row.numYHotels}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'capacity', $event)">{{row.capacity}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'num', $event)">{{row.num}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'educationalPlaces', $event)">{{row.educationalPlaces}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numSportsAssociations', $event)">{{row.numSportsAssociations}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numActiveAssociations', $event)">{{row.numActiveAssociations}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numAffiliates', $event)">{{row.numAffiliates}}</td>
+    </tr>
+  </table>
+
+  <div class="button-container">
+    <button (click)="toggleDetailTable()" class="tabButton">
+      Detail per town
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="saveAllData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+
+  <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th rowspan="2">Youth Camps</th>
+      <th rowspan="2">Youth Centers</th>
+      <th rowspan="2">Youth homes</th>
+      <th colspan="2">youth hostels</th>
+      <th colspan="2">Schools, Institutes, or Sports Training Centers</th>
+      <th colspan="3">Associations</th>
+    </tr>
+    <tr>
+      <th>Number</th>
+      <th>Capacity</th>
+      <th>Number</th>
+      <th>Educational Places</th>
+      <th>Number of Sports Associations</th>
+      <th>Number of Active Associations</th>
+      <th>Number of Affiliates (Members)</th>
+    </tr>
+    
+    <tr >
+      <td colspan="12" class="daira">Daira: Bouira</td>
+    </tr>
+    <tr *ngFor="let row of FirstData; let i = index">
+      <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'youthCamps', $event)">{{row.youthCamps}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'youthCenters', $event)">{{row.youthCenters}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'youthHomes', $event)">{{row.youthHomes}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numYHotels', $event)">{{row.numYHotels}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'capacity', $event)">{{row.capacity}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'num', $event)">{{row.num}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'educationalPlaces', $event)">{{row.educationalPlaces}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numSportsAssociations', $event)">{{row.numSportsAssociations}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numActiveAssociations', $event)">{{row.numActiveAssociations}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numAffiliates', $event)">{{row.numAffiliates}}</td>
+    </tr>
+    <tr >
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{FirstYouthCamps}}</td>
+      <td>{{FirstYouthCenters}}</td>
+      <td>{{FirstYouthHomes}}</td>
+      <td>{{FirstNumYHotels}}</td>
+      <td>{{FirstCapacity}}</td>
+      <td>{{FirstNum}}</td>
+      <td>{{FirstEducationalPlaces}}</td>
+      <td>{{FirstNumSportsAssociations}}</td>
+      <td>{{FirstNumActiveAssociations}}</td>
+      <td>{{FirstNumAffiliates}}</td>
+    </tr>
+    
+    <tr >
+      <td colspan="12" class="daira">Daira: Sour el ghozlane</td>
+    </tr>
+    <tr *ngFor="let row of SecondData; let i = index">
+      <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'youthCamps', $event)">{{row.youthCamps}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'youthCenters', $event)">{{row.youthCenters}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'youthHomes', $event)">{{row.youthHomes}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numYHotels', $event)">{{row.numYHotels}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'capacity', $event)">{{row.capacity}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'num', $event)">{{row.num}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'educationalPlaces', $event)">{{row.educationalPlaces}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numSportsAssociations', $event)">{{row.numSportsAssociations}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numActiveAssociations', $event)">{{row.numActiveAssociations}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numAffiliates', $event)">{{row.numAffiliates}}</td>
+    </tr>
+    <tr >
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{SecondYouthCamps}}</td>
+      <td>{{SecondYouthCenters}}</td>
+      <td>{{SecondYouthHomes}}</td>
+      <td>{{SecondNumYHotels}}</td>
+      <td>{{SecondCapacity}}</td>
+      <td>{{SecondNum}}</td>
+      <td>{{SecondEducationalPlaces}}</td>
+      <td>{{SecondNumSportsAssociations}}</td>
+      <td>{{SecondNumActiveAssociations}}</td>
+      <td>{{SecondNumAffiliates}}</td>
+    </tr>
+  </table>
+  <div class="charts-container">
+    <div class="chart-container">
+      <h3>Youth Facilities Overview</h3>
+      <canvas id="stateChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h3>Daira Comparison</h3>
+      <canvas id="dairaTotalsChart"></canvas>
+    </div>
+  </div>
+</main>

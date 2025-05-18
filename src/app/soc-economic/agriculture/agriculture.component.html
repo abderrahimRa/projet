@@ -1,0 +1,55 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Agriculture</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th rowspan="2">Total Agricultural Area (Ha)</th>
+      <th colspan="4">SAU</th>
+      <th colspan="2">Production</th>
+    </tr>
+    <tr>
+      <th>Total SAU (Ha)</th>
+      <th>Irrigated SAU (Ha)</th>
+      <th>SAU/Total Agricultural Area (%)</th>
+      <th>Irrigated SAU/Total SAU (%)</th>
+      <th>Cereals (Quantals/100)</th>
+      <th>Dairy (Liters/Year)</th>
+      <tr *ngFor="let row of tableData; let i = index">
+        <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{row.code}}</td>
+        <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{row.state}}</td>
+        <td contenteditable="true" (input)="updateCell(i, 'totalAgriArea', $event)">{{row.totalAgriArea}}</td>
+        <td contenteditable="true" (input)="updateCell(i, 'totalSAU', $event)">{{row.totalSAU}}</td>
+        <td contenteditable="true" (input)="updateCell(i, 'irrigatedSAU', $event)">{{row.irrigatedSAU}}</td>
+        <td>{{calculatePercentages(row).SAUontotalAgriArea | number:'1.2-2'}}%</td>
+        <td>{{calculatePercentages(row).irrigatedSAUontotalSAU | number:'1.2-2'}}%</td>
+        <td contenteditable="true" (input)="updateCell(i, 'Cereals', $event)">{{row.Cereals}}</td>
+        <td contenteditable="true" (input)="updateCell(i, 'Dairy', $event)">{{row.Dairy}}</td>
+      </tr>
+  </table>
+  <div class="chart-container">
+    <h3>Agricultural Statistics</h3>
+    <canvas id="agricultureChart"></canvas>
+  </div>
+</main>

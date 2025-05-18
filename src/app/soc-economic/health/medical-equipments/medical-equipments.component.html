@@ -1,0 +1,62 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Health sector: Medical Equipments</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel()">
+          <img src="logo.png" class="im" />
+        </button> 
+      </div>  
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="6">Foncional Medical Equipments</th>
+    </tr>
+    <tr>
+      <th>Fixed and Mobile X-Ray Machines (Number)</th>
+      <th>Ultrasound Scanners (Number)</th>
+      <th>Scanners (Number)</th>
+      <th>Hemodialysis Machines (Number)</th>
+      <th>MRI (Number)</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'FixednMobileXRay', $event)">{{row.FixednMobileXRay}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'ultrasoundScanners', $event)">{{row.ultrasoundScanners}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'scanners', $event)">{{row.scanners}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'hemodialysisMachines', $event)">{{row.hemodialysisMachines}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numMRI', $event)">{{row.numMRI}}</td>
+    </tr>
+  </table>
+  <div class="chart-container">
+    <h3>Medical Equipment Overview</h3>
+    <canvas id="medicalEquipmentChart"></canvas>
+  </div>
+  <div class="charts-container">
+    <div class="chart-wrapper">
+      <canvas id="imagingChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="treatmentChart"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="distributionChart"></canvas>
+    </div>
+  </div>
+</main>

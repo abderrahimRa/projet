@@ -1,0 +1,110 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Mujahideen sector</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel"   (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+  <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="4">Mujahideen Sector</th>
+    </tr>
+    <tr>
+      <th>Number of Mujahideen receiving pensions</th>
+      <th>Number of pension beneficiaries</th>
+      <th>Number of regional Mujahideen museums</th>
+      <th>Number of Mujahideen rest centers</th>
+    </tr>
+    <tr *ngFor="let row of tableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numMujahideenPensions', $event)">{{row.numMujahideenPensions}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numPensionBeneficiaries', $event)">{{row.numPensionBeneficiaries}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numMujahideenMuseums', $event)">{{row.numMujahideenMuseums}}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'numMujahideenRestCenters', $event)">{{row.numMujahideenRestCenters}}</td>
+    </tr>
+  </table>
+
+  <div class="button-container">
+    <button (click)="toggleDetailTable()" class="tabButton">
+      summary status of the State
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel"   (click)="saveAllData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+
+  <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+    <tr>
+      <th rowspan="2">Code</th>
+      <th rowspan="2">State</th>
+      <th colspan="4">Mujahideen Sector</th>
+    </tr>
+    <tr>
+      <th>Number of Mujahideen receiving pensions</th>
+      <th>Number of pension beneficiaries</th>
+      <th>Number of regional Mujahideen museums</th>
+      <th>Number of Mujahideen rest centers</th>
+    </tr>
+    
+    <tr >
+      <td colspan="6" class="daira">Daira: Bouira</td>
+    </tr>
+    <tr *ngFor="let row of FirstData; let i = index">
+      <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numMujahideenPensions', $event)">{{row.numMujahideenPensions}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numPensionBeneficiaries', $event)">{{row.numPensionBeneficiaries}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numMujahideenMuseums', $event)">{{row.numMujahideenMuseums}}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'numMujahideenRestCenters', $event)">{{row.numMujahideenRestCenters}}</td>
+    </tr>
+    <tr >
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{FirstNumMujahideenPensions}}</td>
+      <td>{{FirstNumPensionBeneficiaries}}</td>
+      <td>{{FirstNumMujahideenMuseums}}</td>
+      <td>{{FirstNumMujahideenRestCenters}}</td>
+    </tr>
+    
+    <tr >
+      <td colspan="6" class="daira">Daira: Sour el ghozlane</td>
+    </tr>
+    <tr *ngFor="let row of SecondData; let i = index">
+      <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{row.code}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{row.state}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numMujahideenPensions', $event)">{{row.numMujahideenPensions}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numPensionBeneficiaries', $event)">{{row.numPensionBeneficiaries}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numMujahideenMuseums', $event)">{{row.numMujahideenMuseums}}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'numMujahideenRestCenters', $event)">{{row.numMujahideenRestCenters}}</td>
+    </tr>
+    <tr >
+      <td colspan="2" class="total">Total Daira:</td>
+      <td>{{SecondNumMujahideenPensions}}</td>
+      <td>{{SecondNumPensionBeneficiaries}}</td>
+      <td>{{SecondNumMujahideenMuseums}}</td>
+      <td>{{SecondNumMujahideenRestCenters}}</td>
+    </tr>
+  </table>
+ </main>

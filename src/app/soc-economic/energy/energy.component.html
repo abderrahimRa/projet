@@ -1,0 +1,143 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">Energy</h2>
+      <h3>click on the cell you want to modify</h3>
+  
+
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+      <table id="PopulationTable" class="tab" [ngClass]="{ 'hidden': isTableHidden }">
+        <tr>
+          <th rowspan="2">Code</th>
+          <th rowspan="2">State</th>
+          <th colspan="3">Electricity</th>
+          <th colspan="3">Gaz</th>
+          <th rowspan="2">Number of solar energy connections (homes and structures)</th>
+        </tr>
+        <tr>
+          <th>Overall electricity connection rate (%)</th>
+          <th>Electricity connection rate (urban areas) (%)</th>
+          <th>Electricity connection rate (rural areas) (%)</th>
+          <th>Overall Gaz connection rate (%)</th>
+          <th>Gaz connection rate (urban areas) (%)</th>
+          <th>Gaz connection rate (rural areas) (%)</th>
+        </tr>
+        <tr *ngFor="let row of tableData; let i = index">
+          <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{ row.code }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{ row.state }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'overallElectricity', $event)">{{ row.overallElectricity }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'urbanElecRate', $event)">{{ row.urbanElecRate }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'ruralElecRate', $event)">{{ row.ruralElecRate }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'overallGaz', $event)">{{ row.overallGaz }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'urbanGazRate', $event)">{{ row.urbanGazRate }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'ruralGazRate', $event)">{{ row.ruralGazRate }}</td>
+          <td contenteditable="true" (input)="updateCell(i, 'numSolarEnergy', $event)">{{ row.numSolarEnergy }}</td>
+        </tr>
+      </table>
+    
+      <div class="button-container">
+        <button (click)="toggleDetailTable()" class="tabButton">
+          Summary Status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="saveAllData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel2()">
+          <img src="logo.png" class="im" />
+        </button>
+      </div>
+      
+      <table id="detail" class="tab" [ngClass]="{ hidden: isDetailTableHidden }">
+        <tr>
+          <th rowspan="2">Code</th>
+          <th rowspan="2">State</th>
+          <th colspan="3">Electricity</th>
+          <th colspan="3">Gaz</th>
+          <th rowspan="2">Number of solar energy connections (homes and structures)</th>
+        </tr>
+        <tr>
+          <th>Overall electricity connection rate (%)</th>
+          <th>Electricity connection rate (urban areas) (%)</th>
+          <th>Electricity connection rate (rural areas) (%)</th>
+          <th>Overall Gaz connection rate (%)</th>
+          <th>Gaz connection rate (urban areas) (%)</th>
+          <th>Gaz connection rate (rural areas) (%)</th>
+        </tr>
+    
+        <tr>
+          <td colspan="9" class="daira">Daira: Bouira</td>
+        </tr>
+        <tr *ngFor="let row of FirstData; let i = index">
+          <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{ row.code }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{ row.state }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'overallElectricity', $event)">{{ row.overallElectricity }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'urbanElecRate', $event)">{{ row.urbanElecRate }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'ruralElecRate', $event)">{{ row.ruralElecRate }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'overallGaz', $event)">{{ row.overallGaz }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'urbanGazRate', $event)">{{ row.urbanGazRate }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'ruralGazRate', $event)">{{ row.ruralGazRate }}</td>
+          <td contenteditable="true" (input)="updateFirstCell(i, 'numSolarEnergy', $event)">{{ row.numSolarEnergy }}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="total">Total Daira:</td>
+          <td>{{ FirstoverallElectricity }}</td>
+          <td>{{ FirsturbanElecRate }}</td>
+          <td>{{ FirstruralElecRate }}</td>
+          <td>{{ FirstoverallGaz }}</td>
+          <td>{{ FirsturbanGazRate }}</td>
+          <td>{{ FirstruralGazRate }}</td>
+          <td>{{ FirstnumSolarEnergy }}</td>
+        </tr>
+        <tr>
+          <td colspan="9" class="daira">Daira: Sour el ghozlane</td>
+        </tr>
+        <tr *ngFor="let row of SecondData; let i = index">
+          <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{ row.code }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{ row.state }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'overallElectricity', $event)">{{ row.overallElectricity }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'urbanElecRate', $event)">{{ row.urbanElecRate }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'ruralElecRate', $event)">{{ row.ruralElecRate }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'overallGaz', $event)">{{ row.overallGaz }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'urbanGazRate', $event)">{{ row.urbanGazRate }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'ruralGazRate', $event)">{{ row.ruralGazRate }}</td>
+          <td contenteditable="true" (input)="updateSecondCell(i, 'numSolarEnergy', $event)">{{ row.numSolarEnergy }}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="total">Total Daira:</td>
+          <td>{{ SecondoverallElectricity }}</td>
+          <td>{{ SecondurbanElecRate }}</td>
+          <td>{{ SecondruralElecRate }}</td>
+          <td>{{ SecondoverallGaz }}</td>
+          <td>{{ SecondurbanGazRate }}</td>
+          <td>{{ SecondruralGazRate }}</td>
+          <td>{{ SecondnumSolarEnergy }}</td>
+        </tr>
+      </table>
+<div class="charts-container">
+  <div class="chart-wrapper">
+    <canvas id="stateChart"></canvas>
+  </div>
+  <div class="chart-wrapper">
+    <canvas id="electricityChart"></canvas>
+  </div>
+  <div class="chart-wrapper">
+    <canvas id="gasChart"></canvas>
+  </div>
+</div>
+</main>

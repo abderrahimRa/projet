@@ -1,0 +1,139 @@
+<app-sidebar></app-sidebar>
+<main>
+  <div class="logout-container">
+    <button class="logout-button" (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+  <h2 id="title">General Data</h2>
+      <h3>click on the cell you want to modify</h3>
+      <div class="button-container">
+        <button (click)="toggleTable()" class="tabButton">
+          summary status of the State
+          <ion-icon class="rot" name="chevron-down"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="saveTableData()">
+          <ion-icon name="save"></ion-icon>
+        </button>
+        <button id="exportExcel" (click)="exportTableToExcel1()">
+          <img src="logo.png" class="im" />
+        </button>
+        <button id="exportExcel">
+          <label >
+          <input type="file" (change)="importFromExcel1($event)" accept=".xlsx,.xls" hidden>
+          <ion-icon name="document-attach"></ion-icon> Import
+        </label></button>
+      </div>
+  <table id="PopulationTable" class="tab"  [ngClass]="{ 'hidden': isTableHidden }">
+    <tr>
+      <th rowspan="2" >Code</th>
+      <th rowspan="2" >State</th>
+      <th rowspan="2">Area ( km 2)</th>
+      <th colspan="3">Population (Habitants)</th>
+      <th rowspan="2">Density(Habitant/km 2)</th>
+    </tr>
+    <tr>
+      <th>Urbain (Habitants)</th>
+      <th>Rural (Habitants)</th>
+      <th>Total (Habitants)</th>
+    </tr>
+  
+    <tr *ngFor="let row of TableData; let i = index">
+      <td contenteditable="true" (input)="updateCell(i, 'code', $event)">{{ row.code }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'state', $event)">{{ row.state }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'area', $event)">{{ row.area }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'urbanHabitants', $event)">{{ row.urbanHabitants }}</td>
+      <td contenteditable="true" (input)="updateCell(i, 'ruralHabitants', $event)">{{ row.ruralHabitants }}</td>
+      <td>{{ row.totalHabitants }}</td> 
+      <td>{{ row.density }}</td>
+    </tr>
+  </table>
+  <div class="button-container">
+    <button (click)="toggleDetailTable()" class="tabButton">
+      Detail per town
+      <ion-icon class="rot" name="chevron-down"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="saveTableData()">
+      <ion-icon name="save"></ion-icon>
+    </button>
+    <button id="exportExcel" (click)="exportTableToExcel2()">
+      <img src="logo.png" class="im" />
+    </button>
+  </div>
+  <table id="detail" class="tab"  [ngClass]="{ 'hidden': isDetailTableHidden }">
+    <tr>
+      <th rowspan="2" >Code</th>
+        <th rowspan="2" >town</th>
+        <th rowspan="2">Area ( km 2)</th>
+        <th colspan="3">Population</th>
+        <th rowspan="2">Density(Habitant/km 2)</th>
+    </tr>
+    <tr>
+      <th>Urbain (Habitants)</th>
+      <th>Rural (Habitants)</th>
+      <th>Total (Habitants)</th>
+    </tr>
+  <tr>
+    <td colspan="6" class="daira">Daira: Bouira</td>
+    <td class="daira">
+      <button (click)="fileInput1.click()">
+        <ion-icon name="document-attach"></ion-icon>
+      </button>
+      <input #fileInput1 type="file" (change)="importFirstData($event)" accept=".xlsx,.xls" hidden>
+    </td>
+  </tr>
+    <tr *ngFor="let Frow of FirstData; let i = index">
+      <td contenteditable="true" (input)="updateFirstCell(i, 'code', $event)">{{ Frow.code }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'state', $event)">{{ Frow.state }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'area', $event)">{{ Frow.area }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'urbanHabitants', $event)">{{ Frow.urbanHabitants }}</td>
+      <td contenteditable="true" (input)="updateFirstCell(i, 'ruralHabitants', $event)">{{ Frow.ruralHabitants }}</td>
+      <td>{{ Frow.totalHabitants }}</td>
+      <td>{{ Frow.density }}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="total">Total Daira:</td>
+      <td >{{totalFirstArea}}</td>
+      <td >{{totalFirstUrbanHabitants}}</td>
+      <td >{{totalFirstRuralHabitants}}</td>
+      <td >{{totalFirstTotalHabitants}}</td>
+      <td >{{totalFirstDensity}}</td>
+    </tr>
+    <tr>
+      <td colspan="6"  class="daira">Daira: Sour el ghozlane</td>
+      <td class="daira">
+        <button (click)="fileInput2.click()">
+          <ion-icon name="document-attach"></ion-icon>
+        </button>
+        <input #fileInput2 type="file" (change)="importSecondData($event)" accept=".xlsx,.xls" hidden>
+      </td>    
+    </tr>
+    <tr *ngFor="let Srow of SecondData; let i = index">
+      <td contenteditable="true" (input)="updateSecondCell(i, 'code', $event)">{{ Srow.code }}</td>
+      <td contenteditable="true" (input)="updateSecondCell(i, 'state', $event)">{{ Srow.state }}</td>
+        <td contenteditable="true" (input)="updateSecondCell(i, 'area', $event)">{{ Srow.area }}</td>
+        <td contenteditable="true" (input)="updateSecondCell(i, 'urbanHabitants', $event)">{{ Srow.urbanHabitants }}</td>
+        <td contenteditable="true" (input)="updateSecondCell(i, 'ruralHabitants', $event)">{{ Srow.ruralHabitants }}</td>
+        <td >{{ Srow.totalHabitants }}</td>
+        <td >{{ Srow.density }}</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="total">Total Daira:</td>
+        <td>{{ totalSecondArea }}</td>
+      <td>{{ totalSecondUrbanHabitants }}</td>
+      <td>{{ totalSecondRuralHabitants }}</td>
+      <td>{{ totalSecondTotalHabitants }}</td>
+      <td>{{ totalSecondDensity }}</td>
+      </tr>
+  </table>
+  <div class="charts-container">
+    <div class="chart-container">
+      <h3>General Data Overview</h3>
+      <canvas id="stateChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h3>Daira Comparison</h3>
+      <canvas id="dairaTotalsChart"></canvas>
+    </div>
+  </div>
+ </main>
