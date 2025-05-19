@@ -1,13 +1,11 @@
 <app-sidebar></app-sidebar>
 <div class="logout-container">
-  <button class="logout-button" (click)="onLogout()">
-    Log out
-  </button>
+  <button class="logout-button" (click)="onLogout()">Log out</button>
 </div>
 
 <div class="admin-dashboard">
   <h2>Admin Dashboard</h2>
-  
+
   <div class="stats-card">
     <h3>Active Users</h3>
     <div class="count">{{ activeUserCount }}</div>
@@ -24,22 +22,32 @@
   <!-- User Management Section -->
   <div class="user-management">
     <h3>User Management</h3>
-    
+
     <!-- Add User Form -->
     <div class="form-card">
       <h4>Add New User</h4>
       <form (ngSubmit)="addUser()" #addUserForm="ngForm">
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" 
-                 [(ngModel)]="newUser.username" required 
-                 placeholder="Enter username">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            [(ngModel)]="newUser.username"
+            required
+            placeholder="Enter username"
+          />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" 
-                 [(ngModel)]="newUser.password" required 
-                 placeholder="Enter password">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="newUser.password"
+            required
+            placeholder="Enter password"
+          />
         </div>
         <div class="form-group">
           <label for="role">Role</label>
@@ -60,42 +68,102 @@
       <form (ngSubmit)="removeUser()" #removeUserForm="ngForm">
         <div class="form-group">
           <label for="userToRemove">Select User</label>
-          <select id="userToRemove" name="userToRemove" 
-                  [(ngModel)]="selectedUserToRemove" required>
+          <select
+            id="userToRemove"
+            name="userToRemove"
+            [(ngModel)]="selectedUserToRemove"
+            required
+          >
             <option value="">Select user to remove</option>
             <option *ngFor="let user of allUsers" [value]="user.username">
               {{ user.username }} ({{ user.role }})
             </option>
           </select>
         </div>
-        <button type="submit" [disabled]="!removeUserForm.valid" 
-                class="danger">Remove User</button>
+        <button type="submit" [disabled]="!removeUserForm.valid" class="danger">
+          Remove User
+        </button>
       </form>
     </div>
   </div>
 </div>
 
-<h1>Table Structure</h1>
-<table id="PopulationTable" class="tab">
-  <tr>
-    <th rowspan="2">Code</th>
-    <th rowspan="2">State</th>
-    <th colspan="4">Indecator</th>
-    <th rowspan="2">V(n+1)</th>
-  </tr>
-  <tr>
-    <th>V01</th>
-    <th>V02</th>
-    <th>......</th>
-    <th>Vn</th>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+<h1>Data Tables</h1>
+
+<!-- Dataset Selection -->
+<div class="dataset-selector">
+  <label for="datasetSelect">Select Dataset:</label>
+  <select
+    id="datasetSelect"
+    [(ngModel)]="selectedDataset"
+    (change)="loadSelectedDataset()"
+  >
+    <option value="population">Population</option>
+    <option value="agriculture">Agriculture</option>
+    <option value="health">Health</option>
+    <option value="education">Education</option>
+    <option value="transport">Transport</option>
+    <option value="energy">Energy</option>
+    <option value="water">Water</option>
+    <option value="employment">Employment</option>
+    <option value="tourism">Tourism</option>
+    <option value="craftsmanship">Craftsmanship</option>
+    <option value="socialProtection">Social Protection</option>
+    <option value="youth">Youth</option>
+    <option value="sports">Sports</option>
+    <option value="worship">Worship</option>
+  </select>
+</div>
+
+<!-- Dynamic Table -->
+<table id="DataTable" class="tab" *ngIf="datasetItems.length > 0">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>State</th>
+      <ng-container *ngFor="let key of displayedColumns">
+        <th
+          *ngIf="
+            key !== 'id' &&
+            key !== 'code' &&
+            key !== 'state' &&
+            key !== 'state_id'
+          "
+        >
+          {{ key }}
+        </th>
+      </ng-container>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of datasetItems">
+      <td>{{ item.code }}</td>
+      <td>{{ item.state }}</td>
+      <ng-container *ngFor="let key of displayedColumns">
+        <td
+          *ngIf="
+            key !== 'id' &&
+            key !== 'code' &&
+            key !== 'state' &&
+            key !== 'state_id'
+          "
+        >
+          {{ item[key] }}
+        </td>
+      </ng-container>
+      <td>
+        <button class="edit-btn" (click)="editItem(item)">Edit</button>
+        <button class="delete-btn" (click)="deleteItem(item)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
+<div *ngIf="datasetItems.length === 0 && selectedDataset" class="empty-message">
+  No data found for selected dataset. Click the button below to add data.
+</div>
+
+<button *ngIf="selectedDataset" class="add-btn" (click)="addNewItem()">
+  Add New Record
+</button>

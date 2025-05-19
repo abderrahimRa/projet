@@ -201,30 +201,57 @@ button[disabled] {
   background-color: #f1f1f1;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .admin-dashboard {
-    padding: 15px;
-    margin-top: 1rem;
-  }
-  
-  .form-card {
-    padding: 1rem;
-  }
-  
-  .form-group input,
-  .form-group select {
-    padding: 0.6rem;
-  }
-  
-  .tab {
-    width: 95%;
-    margin: 20px auto;
-  }
-  
-  h1 {
-    margin-left: 20px;
-  }
+/* Dataset Selector */
+.dataset-selector {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.dataset-selector label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.dataset-selector select {
+  padding: 8px 15px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: white;
+  font-size: 14px;
+  min-width: 200px;
+}
+
+/* Data Table */
+#DataTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#DataTable thead {
+  background-color: #4a6fa5;
+  color: white;
+}
+
+#DataTable th, #DataTable td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#DataTable tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+#DataTable tbody tr:hover {
+  background-color: #e9f0f8;
 }
 
 /* Additional Styles for Consistency */
@@ -254,4 +281,30 @@ button[disabled] {
 .button-container button img.im {
   width: 20px;
   height: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 15px;
+    margin-top: 1rem;
+  }
+
+  .form-card {
+    padding: 1rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.6rem;
+  }
+
+  .tab {
+    width: 95%;
+    margin: 20px auto;
+  }
+
+  h1 {
+    margin-left: 20px;
+  }
 }

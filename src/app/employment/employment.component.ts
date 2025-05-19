@@ -1,8 +1,10 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 import { UserService } from '../services/user.service';
+import { Employment, EmploymentService } from '../services/employment.service';
+import { StateService, State } from '../services/state.service';
+import { AuthService } from '../services/auth.service';
 declare const Chart: any;
 
 @Component({
@@ -11,33 +13,35 @@ declare const Chart: any;
   styleUrls: ['./employment.component.css'],
   standalone: false,
 })
-export class EmploymentComponent implements AfterViewInit {
+export class EmploymentComponent implements AfterViewInit, OnInit {
   isTableHidden = false;
   private employmentChart: any;
-  
+  states: State[] = [];
+  employmentData: Employment[] = [];
+  http: any;
 
   constructor(
-    private http: HttpClient, 
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private employmentService: EmploymentService,
+    private stateService: StateService,
+    private authService: AuthService
   ) {}
+  tableData: any[] = [];
 
-  tableData: any[] = [
-    {
-      code: 0,
-      state: '',
-      active: 0, 
-      occupied: 0, 
-      unemployed: 0, 
-      unemploymentRate: 0, 
-    },
-  ];
+  ngOnInit() {
+    // Load states first, then employment data
+    this.loadStates();
+  }
+  loadStates() {
+    throw new Error('Method not implemented.');
+  }
 
   // Update a cell and recalculate the unemployment rate
   updateCell(rowIndex: number, field: string, event: Event) {
     const inputElement = event.target as HTMLElement;
     let newValue = inputElement.innerText;
-  
+
     if (field === 'code') {
       const numericValue = parseInt(newValue) || 0;
       this.tableData[rowIndex][field] = numericValue;
@@ -47,13 +51,13 @@ export class EmploymentComponent implements AfterViewInit {
     } else {
       const numericValue = parseFloat(newValue) || 0;
       this.tableData[rowIndex][field] = numericValue;
-      newValue = numericValue.toString(); 
+      newValue = numericValue.toString();
     }
 
     if (field === 'active' || field === 'unemployed') {
       this.calculateUnemploymentRate(rowIndex);
     }
-    
+
     setTimeout(() => {
       if (inputElement.childNodes.length > 0) {
         const range = document.createRange();
@@ -106,13 +110,13 @@ export class EmploymentComponent implements AfterViewInit {
       if (currentUser) {
         this.userService.removeActiveUser(currentUser);
       }
-      
+
       localStorage.removeItem('userRole');
       localStorage.removeItem('sessionExpires');
       localStorage.removeItem('currentUser');
-  
+
       this.router.navigate(['/login'], { replaceUrl: true });
-  
+
       setTimeout(() => {
         window.history.pushState(null, '', window.location.href);
         window.addEventListener('popstate', () => {
@@ -123,39 +127,56 @@ export class EmploymentComponent implements AfterViewInit {
   }
 
   saveTableData() {
-    this.tableData.forEach(row => {
+    this.tableData.forEach((row) => {
       const employmentData = {
         state: {
-          id: parseInt(row.code) // Assuming code is the state ID
+          id: parseInt(row.code), // Assuming code is the state ID
         },
         population: row.active, // Using active as population
         active: row.active,
         occupied: row.occupied,
         unemployed: row.unemployed,
-        unemploymentRate: parseFloat(row.unemploymentRate)
+        unemploymentRate: parseFloat(row.unemploymentRate),
       };
 
       // First try to update existing data
-      this.http.put(`${'http://localhost:8082/api/employment'}/${row.code}`, employmentData).subscribe({
-        next: (response) => {
-          console.log('Data updated successfully for state:', row.code);
-        },
-        error: (error) => {
-          if (error.status === 404) {
-            // If not found, create new entry
-            this.http.post('http://localhost:8082/api/employment/savedata', employmentData).subscribe({
-              next: (response) => {
-                console.log('Data created successfully for state:', row.code);
-              },
-              error: (createError) => {
-                console.error('Error creating data for state:', row.code, createError);
-              }
-            });
-          } else {
-            console.error('Error updating data for state:', row.code, error);
-          }
-        }
-      });
+      this.http
+        .put(
+          `${'http://localhost:8082/api/employment'}/${row.code}`,
+          employmentData
+        )
+        .subscribe({
+          next: (_response: any) => {
+            console.log('Data updated successfully for state:', row.code);
+          },
+          error: (error: { status: number; }) => {
+            if (error.status === 404) {
+              // If not found, create new entry
+              this.http
+                .post(
+                  'http://localhost:8082/api/employment/savedata',
+                  employmentData
+                )
+                .subscribe({
+                  next: () => {
+                    console.log(
+                      'Data created successfully for state:',
+                      row.code
+                    );
+                  },
+                  error: (createError: any) => {
+                    console.error(
+                      'Error creating data for state:',
+                      row.code,
+                      createError
+                    );
+                  },
+                });
+            } else {
+              console.error('Error updating data for state:', row.code, error);
+            }
+          },
+        });
     });
   }
 
@@ -172,10 +193,10 @@ export class EmploymentComponent implements AfterViewInit {
         const workbook = XLSX.read(data, { type: 'array' });
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
-        
+
         // Clear existing data
         this.tableData = [];
-        
+
         // Import new data
         jsonData.forEach((row: any) => {
           const newRow = {
@@ -184,16 +205,16 @@ export class EmploymentComponent implements AfterViewInit {
             active: +row['Active'] || 0,
             occupied: +row['Ocupied'] || 0,
             unemployed: +row['Unemployed'] || 0,
-            unemploymentRate: 0 // Will be calculated
+            unemploymentRate: 0, // Will be calculated
           };
           this.tableData.push(newRow);
         });
-        
+
         // Recalculate unemployment rates
         this.tableData.forEach((_, index) => {
           this.calculateUnemploymentRate(index);
         });
-        
+
         this.updateChart();
       } catch (error) {
         console.error('Error importing data:', error);
@@ -215,30 +236,30 @@ export class EmploymentComponent implements AfterViewInit {
       this.employmentChart = new Chart(ctx.getContext('2d'), {
         type: 'bar',
         data: {
-          labels: this.tableData.map(row => row.state || 'State ' + row.code),
+          labels: this.tableData.map((row) => row.state || 'State ' + row.code),
           datasets: [
             {
               label: 'Active Population',
-              data: this.tableData.map(row => row.active),
+              data: this.tableData.map((row) => row.active),
               backgroundColor: 'rgba(54, 162, 235, 0.7)',
               borderColor: 'rgba(54, 162, 235, 1)',
-              borderWidth: 1
+              borderWidth: 1,
             },
             {
               label: 'Occupied',
-              data: this.tableData.map(row => row.occupied),
+              data: this.tableData.map((row) => row.occupied),
               backgroundColor: 'rgba(75, 192, 192, 0.7)',
               borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1
+              borderWidth: 1,
             },
             {
               label: 'Unemployed',
-              data: this.tableData.map(row => row.unemployed),
+              data: this.tableData.map((row) => row.unemployed),
               backgroundColor: 'rgba(255, 99, 132, 0.7)',
               borderColor: 'rgba(255, 99, 132, 1)',
-              borderWidth: 1
-            }
-          ]
+              borderWidth: 1,
+            },
+          ],
         },
         options: {
           responsive: true,
@@ -249,12 +270,12 @@ export class EmploymentComponent implements AfterViewInit {
               text: 'Employment Statistics',
               font: {
                 size: 16,
-                weight: 'bold'
-              }
+                weight: 'bold',
+              },
             },
             legend: {
-              position: 'top'
-            }
+              position: 'top',
+            },
           },
           scales: {
             y: {
@@ -263,31 +284,39 @@ export class EmploymentComponent implements AfterViewInit {
                 display: true,
                 text: 'Population',
                 font: {
-                  weight: 'bold'
-                }
-              }
+                  weight: 'bold',
+                },
+              },
             },
             x: {
               title: {
                 display: true,
                 text: 'States',
                 font: {
-                  weight: 'bold'
-                }
-              }
-            }
-          }
-        }
+                  weight: 'bold',
+                },
+              },
+            },
+          },
+        },
       });
     }
   }
 
   private updateChart() {
     if (this.employmentChart) {
-      this.employmentChart.data.labels = this.tableData.map(row => row.state || 'State ' + row.code);
-      this.employmentChart.data.datasets[0].data = this.tableData.map(row => row.active);
-      this.employmentChart.data.datasets[1].data = this.tableData.map(row => row.occupied);
-      this.employmentChart.data.datasets[2].data = this.tableData.map(row => row.unemployed);
+      this.employmentChart.data.labels = this.tableData.map(
+        (row) => row.state || 'State ' + row.code
+      );
+      this.employmentChart.data.datasets[0].data = this.tableData.map(
+        (row) => row.active
+      );
+      this.employmentChart.data.datasets[1].data = this.tableData.map(
+        (row) => row.occupied
+      );
+      this.employmentChart.data.datasets[2].data = this.tableData.map(
+        (row) => row.unemployed
+      );
       this.employmentChart.update();
     }
   }

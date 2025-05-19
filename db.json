@@ -1,0 +1,593 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "user123",
+      "role": "user"
+    },
+    {
+      "id": "3",
+      "username": "kh__abderrahim",
+      "password": "123",
+      "role": "editor"
+    }
+  ],
+  "states": [
+    {
+      "id": "1",
+      "code": "ST01",
+      "name": "Ariana"
+    },
+    {
+      "id": "2",
+      "code": "ST02",
+      "name": "Béja"
+    },
+    {
+      "id": "3",
+      "code": "ST03",
+      "name": "Ben Arous"
+    },
+    {
+      "id": "4",
+      "code": "ST04",
+      "name": "Bizerte"
+    },
+    {
+      "id": "5",
+      "code": "ST05",
+      "name": "Gabès"
+    },
+    {
+      "id": "6",
+      "code": "ST06",
+      "name": "Gafsa"
+    },
+    {
+      "id": "7",
+      "code": "ST07",
+      "name": "Jendouba"
+    },
+    {
+      "id": "8",
+      "code": "ST08",
+      "name": "Kairouan"
+    },
+    {
+      "id": "9",
+      "code": "ST09",
+      "name": "Kasserine"
+    },
+    {
+      "id": "10",
+      "code": "ST10",
+      "name": "Kébili"
+    },
+    {
+      "id": "11",
+      "code": "ST11",
+      "name": "Le Kef"
+    },
+    {
+      "id": "12",
+      "code": "ST12",
+      "name": "Mahdia"
+    },
+    {
+      "id": "13",
+      "code": "ST13",
+      "name": "La Manouba"
+    },
+    {
+      "id": "14",
+      "code": "ST14",
+      "name": "Médenine"
+    },
+    {
+      "id": "15",
+      "code": "ST15",
+      "name": "Monastir"
+    },
+    {
+      "id": "16",
+      "code": "ST16",
+      "name": "Nabeul"
+    },
+    {
+      "id": "17",
+      "code": "ST17",
+      "name": "Sfax"
+    },
+    {
+      "id": "18",
+      "code": "ST18",
+      "name": "Sidi Bouzid"
+    },
+    {
+      "id": "19",
+      "code": "ST19",
+      "name": "Siliana"
+    },
+    {
+      "id": "20",
+      "code": "ST20",
+      "name": "Sousse"
+    },
+    {
+      "id": "21",
+      "code": "ST21",
+      "name": "Tataouine"
+    },
+    {
+      "id": "22",
+      "code": "ST22",
+      "name": "Tozeur"
+    },
+    {
+      "id": "23",
+      "code": "ST23",
+      "name": "Tunis"
+    },
+    {
+      "id": "24",
+      "code": "ST24",
+      "name": "Zaghouan"
+    }
+  ],
+  "agriculture": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "totalAgriArea": 15430,
+      "totalSAU": 12845,
+      "irrigatedSAU": 5270,
+      "SAUontotalAgriArea": 83.25,
+      "irrigatedSAUontotalSAU": 41.03,
+      "Cereals": 3850,
+      "Dairy": 4500
+    },
+    {
+      "id": "2",
+      "state_id": 2,
+      "code": "ST02",
+      "state": "Béja",
+      "totalAgriArea": 28750,
+      "totalSAU": 24380,
+      "irrigatedSAU": 3540,
+      "SAUontotalAgriArea": 84.8,
+      "irrigatedSAUontotalSAU": 14.52,
+      "Cereals": 12650,
+      "Dairy": 3200
+    },
+    {
+      "id": "3",
+      "state_id": 3,
+      "code": "ST03",
+      "state": "Ben Arous",
+      "totalAgriArea": 12800,
+      "totalSAU": 10850,
+      "irrigatedSAU": 4920,
+      "SAUontotalAgriArea": 84.77,
+      "irrigatedSAUontotalSAU": 45.35,
+      "Cereals": 2750,
+      "Dairy": 1850
+    }
+  ],
+  "health": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "publicHospitals": 4,
+      "privateHospitals": 7,
+      "numDoctors": 520,
+      "numNurses": 1250,
+      "numBeds": 950,
+      "populationPerDoctor": 1230
+    },
+    {
+      "id": "2",
+      "state_id": 2,
+      "code": "ST02",
+      "state": "Béja",
+      "publicHospitals": 3,
+      "privateHospitals": 2,
+      "numDoctors": 180,
+      "numNurses": 470,
+      "numBeds": 350,
+      "populationPerDoctor": 1820
+    },
+    {
+      "id": "3",
+      "state_id": 3,
+      "code": "ST03",
+      "state": "Ben Arous",
+      "publicHospitals": 5,
+      "privateHospitals": 8,
+      "numDoctors": 480,
+      "numNurses": 1100,
+      "numBeds": 870,
+      "populationPerDoctor": 1350
+    }
+  ],
+  "education": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "primarySchools": 45,
+      "secondarySchools": 20,
+      "universities": 3,
+      "numTeachers": 2450,
+      "numStudents": 48500,
+      "studentTeacherRatio": 19.8
+    },
+    {
+      "id": "2",
+      "state_id": 2,
+      "code": "ST02",
+      "state": "Béja",
+      "primarySchools": 38,
+      "secondarySchools": 15,
+      "universities": 1,
+      "numTeachers": 1850,
+      "numStudents": 35200,
+      "studentTeacherRatio": 19
+    },
+    {
+      "id": "3",
+      "state_id": 3,
+      "code": "ST03",
+      "state": "Ben Arous",
+      "primarySchools": 42,
+      "secondarySchools": 18,
+      "universities": 2,
+      "numTeachers": 2300,
+      "numStudents": 45800,
+      "studentTeacherRatio": 19.9
+    }
+  ],
+  "transport": {
+    "roads": [
+      {
+        "id": 1,
+        "state_id": 1,
+        "code": "ST01",
+        "state": "Ariana",
+        "pavedRoads": 1250,
+        "unpavedRoads": 380,
+        "nationalHighways": 95,
+        "roadDensity": 1.35
+      },
+      {
+        "id": 2,
+        "state_id": 2,
+        "code": "ST02",
+        "state": "Béja",
+        "pavedRoads": 980,
+        "unpavedRoads": 620,
+        "nationalHighways": 75,
+        "roadDensity": 0.86
+      }
+    ],
+    "airports": [
+      {
+        "id": 1,
+        "state_id": 17,
+        "code": "ST17",
+        "state": "Sfax",
+        "airportName": "Sfax-Thyna Airport",
+        "passengers": 120000,
+        "runways": 1,
+        "international": true
+      },
+      {
+        "id": 2,
+        "state_id": 14,
+        "code": "ST14",
+        "state": "Médenine",
+        "airportName": "Djerba-Zarzis Airport",
+        "passengers": 1850000,
+        "runways": 1,
+        "international": true
+      }
+    ],
+    "railwayNetwork": [
+      {
+        "id": 1,
+        "state_id": 1,
+        "code": "ST01",
+        "state": "Ariana",
+        "trackLength": 45,
+        "stations": 5,
+        "passengerTraffic": 2800000
+      },
+      {
+        "id": 2,
+        "state_id": 23,
+        "code": "ST23",
+        "state": "Tunis",
+        "trackLength": 120,
+        "stations": 18,
+        "passengerTraffic": 8500000
+      }
+    ],
+    "ports": [
+      {
+        "id": 1,
+        "state_id": 4,
+        "code": "ST04",
+        "state": "Bizerte",
+        "portName": "Bizerte Port",
+        "cargoVolume": 4200000,
+        "containers": 450000,
+        "passengers": 85000
+      },
+      {
+        "id": 2,
+        "state_id": 17,
+        "code": "ST17",
+        "state": "Sfax",
+        "portName": "Sfax Commercial Port",
+        "cargoVolume": 5800000,
+        "containers": 520000,
+        "passengers": 25000
+      }
+    ],
+    "urbanAndSuburban": [
+      {
+        "id": 1,
+        "state_id": 23,
+        "code": "ST23",
+        "state": "Tunis",
+        "busLines": 35,
+        "tramLines": 6,
+        "metroLines": 2,
+        "dailyRides": 850000
+      },
+      {
+        "id": 2,
+        "state_id": 20,
+        "code": "ST20",
+        "state": "Sousse",
+        "busLines": 18,
+        "tramLines": 0,
+        "metroLines": 0,
+        "dailyRides": 320000
+      }
+    ]
+  },
+  "energy": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "electricityProduction": 850,
+      "electricityConsumption": 1250,
+      "renewablePercentage": 12.5,
+      "powerStations": 1
+    },
+    {
+      "id": "2",
+      "state_id": 6,
+      "code": "ST06",
+      "state": "Gafsa",
+      "electricityProduction": 2200,
+      "electricityConsumption": 850,
+      "renewablePercentage": 5.8,
+      "powerStations": 3
+    }
+  ],
+  "water": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "waterProduction": 58.5,
+      "waterConsumption": 52.8,
+      "treatmentPlants": 2,
+      "connectionRate": 98.5
+    },
+    {
+      "id": "2",
+      "state_id": 10,
+      "code": "ST10",
+      "state": "Kébili",
+      "waterProduction": 28.3,
+      "waterConsumption": 25.6,
+      "treatmentPlants": 1,
+      "connectionRate": 92.1
+    }
+  ],
+  "employment": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "employmentRate": 75.2,
+      "unemploymentRate": 8.5,
+      "youthUnemployment": 18.3,
+      "workingPopulation": 285000
+    },
+    {
+      "id": "2",
+      "state_id": 2,
+      "code": "ST02",
+      "state": "Béja",
+      "employmentRate": 68.5,
+      "unemploymentRate": 14.2,
+      "youthUnemployment": 28.6,
+      "workingPopulation": 120000
+    }
+  ],
+  "tourism": [
+    {
+      "id": "1",
+      "state_id": 14,
+      "code": "ST14",
+      "state": "Médenine",
+      "hotels": 120,
+      "bedCapacity": 45000,
+      "touristArrivals": 850000,
+      "averageStay": 5.2
+    },
+    {
+      "id": "2",
+      "state_id": 20,
+      "code": "ST20",
+      "state": "Sousse",
+      "hotels": 95,
+      "bedCapacity": 38000,
+      "touristArrivals": 785000,
+      "averageStay": 4.8
+    }
+  ],
+  "craftsmanship": [
+    {
+      "id": "1",
+      "state_id": 9,
+      "code": "ST09",
+      "state": "Kasserine",
+      "workshopsNumber": 850,
+      "artisansNumber": 3500,
+      "annualRevenue": 12500000
+    },
+    {
+      "id": "2",
+      "state_id": 21,
+      "code": "ST21",
+      "state": "Tataouine",
+      "workshopsNumber": 620,
+      "artisansNumber": 2400,
+      "annualRevenue": 9800000
+    }
+  ],
+  "socialProtection": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "socialCenters": 8,
+      "beneficiaries": 12500,
+      "coverageRate": 85.2
+    },
+    {
+      "id": "2",
+      "state_id": 18,
+      "code": "ST18",
+      "state": "Sidi Bouzid",
+      "socialCenters": 12,
+      "beneficiaries": 24800,
+      "coverageRate": 68.5
+    }
+  ],
+  "youth": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "youthCenters": 5,
+      "youthOrganizations": 12,
+      "programParticipants": 8500
+    },
+    {
+      "id": "2",
+      "state_id": 2,
+      "code": "ST02",
+      "state": "Béja",
+      "youthCenters": 4,
+      "youthOrganizations": 8,
+      "programParticipants": 5200
+    }
+  ],
+  "sports": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "sportsFacilities": 28,
+      "sportsClubs": 45,
+      "registeredAthletes": 12500
+    },
+    {
+      "id": "2",
+      "state_id": 17,
+      "code": "ST17",
+      "state": "Sfax",
+      "sportsFacilities": 35,
+      "sportsClubs": 60,
+      "registeredAthletes": 18200
+    }
+  ],
+  "worship": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "mosques": 85,
+      "churches": 2,
+      "synagogues": 0,
+      "otherPlaces": 3
+    },
+    {
+      "id": "2",
+      "state_id": 14,
+      "code": "ST14",
+      "state": "Médenine",
+      "mosques": 120,
+      "churches": 1,
+      "synagogues": 1,
+      "otherPlaces": 2
+    }
+  ],
+  "population": [
+    {
+      "id": "1",
+      "state_id": 1,
+      "code": "ST01",
+      "state": "Ariana",
+      "totalPopulation": 640000,
+      "malePopulation": 315000,
+      "femalePopulation": 325000,
+      "urbanPopulation": 580000,
+      "ruralPopulation": 60000,
+      "populationDensity": 682.5,
+      "birthRate": 12.8,
+      "deathRate": 5.6,
+      "naturalIncrease": 7.2
+    },
+    {
+      "id": "2",
+      "state_id": 2,
+      "code": "ST02",
+      "state": "Béja",
+      "totalPopulation": 320000,
+      "malePopulation": 159000,
+      "femalePopulation": 161000,
+      "urbanPopulation": 185000,
+      "ruralPopulation": 135000,
+      "populationDensity": 124.8,
+      "birthRate": 10.9,
+      "deathRate": 6.2,
+      "naturalIncrease": 4.7
+    }
+  ]
+}
